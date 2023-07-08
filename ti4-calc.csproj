@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,11 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrier.cs" />
+    <Compile Include="CombatBombardment.cs" />
+    <Compile Include="CombatSpaceCannon.cs" />
+    <Compile Include="Cruiser.cs" />
+    <Compile Include="Destroyer.cs" />
+    <Compile Include="Dreadnaught.cs" />
+    <Compile Include="Exception.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Tech.cs" />
+    <Compile Include="Unit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Combat.cs" />
+    <Compile Include="AntiFtrBarrage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="combatNotes.txt" />
+    <Content Include="unitNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

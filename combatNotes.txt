@@ -1,0 +1,67 @@
+﻿Combat {
+	private int toHit;
+	private int numberOfDice = 1;
+
+	bool getsAHit();
+
+	RunSpaceCombat() {
+		AntiFtrBarrage();
+		AnnounceRetreat();
+		RollDice();
+		AssignHits();
+		Retreat();
+	}
+
+	RunGroundCombat() {
+		Bombardment();
+		CommitGroundForces();
+		SpaceCannonDefense();
+	}
+}
+
+CombatAntiFtrBarrage : Combat {
+	// one attack, can only hit fighters
+		// if one or both players have no ships, combat ends
+	private int toHit;
+	private int numberOfDice = 1;
+}
+
+CombatBombardment : Combat {
+	private int toHit;
+	private int numberOfDice = 1;
+}
+
+CombatSpaceCannon : Combat {
+	private int toHit;
+	private int numberOfDice = 1;
+}
+
+Tech {
+	private bool carrierUpgraded;
+	private bool cruiserUpgraded;
+	// etc
+
+	// Make this like a JS object somehow?
+	{
+		carrier: false,
+		cruiser: true,
+		// etc
+	}
+}
+
+Unit {
+	private string unitName;
+	private int cost;
+	private int move;
+	private int capacity = 0;
+	private int reinforcements;
+	private bool canSustainDamage = false;
+	private bool sustainDamageUsed = false;
+	private string specialText = null;
+	private string specialAttackType = null;
+}
+
+
+UnitNames {
+	// late prio
+}
