@@ -22,14 +22,10 @@
 				SetSpecialAttackNumberOfDice(2);
 			}
 
-			if (_isArgent && upgraded) {
-				SetCombatToHit(7);
-				// SpecialText for this specialAttack. Implement in AFB class.
-			} else if (_isArgent || upgraded) {
-				SetCombatToHit(8);
-			} else {
-				SetCombatToHit(9);
-			}
+			if (_isArgent && upgraded) SetCombatToHit(7);
+			// SpecialText for this specialAttack. Implement in AFB class.
+			else if (_isArgent || upgraded) SetCombatToHit(8);
+			else SetCombatToHit(9);
 		}
 
 		// UpgradeDestroyer() ???

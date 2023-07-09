@@ -54,6 +54,8 @@
     <Compile Include="Fighter.cs" />
     <Compile Include="Flagship.cs" />
     <Compile Include="Infantry.cs" />
+    <Compile Include="Mech.cs" />
+    <Compile Include="PDS.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Tech.cs" />
     <Compile Include="Unit.cs" />

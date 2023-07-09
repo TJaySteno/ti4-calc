@@ -10,9 +10,9 @@
 
 			SetUnitBaseStats(0.5, 10);
 
-			if (upgraded && _isNaalu) { SetCombatToHit(7); }
-			else if (upgraded || _isNaalu) { SetCombatToHit(8); }
-			else { SetCombatToHit(9); }
+			if (upgraded && _isNaalu) SetCombatToHit(7);
+			else if (upgraded || _isNaalu) SetCombatToHit(8);
+			else SetCombatToHit(9);
 
 			if (upgraded) {
 				SetUnitMove(2);
@@ -21,10 +21,7 @@
 				if (_isNaalu) { AppendSpecialText("Each fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."); }
 				else { AppendSpecialText("Each fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."); }
 			}
-			else
-			{
-				SetUnitMove(0);
-			}
+			else SetUnitMove(0);
 		}
 
 		// UpgradeFighter() ???

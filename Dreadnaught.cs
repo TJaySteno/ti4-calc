@@ -27,10 +27,7 @@
 			{
 				SetSpecialText("\"Direct Hit\" cards are no longer effective against this type of ship.");
 
-				if (_isSardakk)
-				{
-					AppendSpecialText("After a round of space combat, you may destroy this unit to destroy up to 2 ships in this system.");
-				}
+				if (_isSardakk) AppendSpecialText("After a round of space combat, you may destroy this unit to destroy up to 2 ships in this system.");
 			}
 		}
 

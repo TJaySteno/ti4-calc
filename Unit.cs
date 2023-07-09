@@ -16,7 +16,10 @@
 		public int CombatNumberOfDice { get; private set; } = 1;
 
 		public bool CanSustainDamage { get; private set; } = false;
-		public bool HasSustainedDamage { get; private set; } = false;
+		public bool SustainedDamage { get; private set; } = false;
+
+		public bool HasPlanetaryShield { get; private set; } = false;
+		public bool CanBypassPlanetaryShield { get; private set; } = false;
 
 		public string SpecialText { get; private set; } = null;
 
@@ -53,6 +56,9 @@
 		public void SetCombatNumberOfDice(int combatNumberOfDice) => CombatNumberOfDice = combatNumberOfDice;
 
 		public void ActivateSustainDamage() => CanSustainDamage = true;
+		
+		public void ActivatePlanetaryShield() => HasPlanetaryShield = true;
+		public void ActivateBypassPlanetaryShield() => CanBypassPlanetaryShield = true;
 
 		public void SetSpecialText(string specialText) => SpecialText = specialText;
 		public void AppendSpecialText(string specialText) => SpecialText += "; " + specialText;
@@ -64,11 +70,8 @@
 		// Methods?
 		public void DamageUnit()
 		{
-			if (CanSustainDamage == true && HasSustainedDamage == false) {
-				HasSustainedDamage = true;
-			} else {
-				IsActive = false;
-			}
+			if (CanSustainDamage == true && SustainedDamage == false) SustainedDamage = true;
+			else IsActive = false;
 		}
 		
 		// HaveMoreInReinforcements()

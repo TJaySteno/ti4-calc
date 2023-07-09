@@ -19,14 +19,17 @@
 			ActivateSustainDamage();
 			
 			SetSpecialText("Other players' units in this system lose their Planetary Shield ability");
+			ActivateBypassPlanetaryShield();
 
+			// SetSpecialAttack
 			SetSpecialAttackType("Bombard");
 			SetSpecialAttackToHit(3);
 			SetSpecialAttackNumberOfDice(3);
 
-			if (_isMuaatUpgraded) { SetUnitMove(3); }
-			else if (upgraded) { SetUnitMove(2); }
-			else if (_isMuaat) { SetUnitMove(1); }
+			// SetUnitMove
+			if (_isMuaatUpgraded) SetUnitMove(3);
+			else if (upgraded) SetUnitMove(2);
+			else if (_isMuaat) SetUnitMove(1);
 		}
 
 		// UpgradeWarSun() ???

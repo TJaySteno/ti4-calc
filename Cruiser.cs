@@ -13,12 +13,12 @@
 				SetCombatToHit(6);
 			}
 
-			if (_isTitans && upgraded) {
+			if (_isTitans && upgraded)
+			{
 				SetUnitCapacity(2);
 				ActivateSustainDamage();
-			} else if (_isTitans || upgraded) {
-				SetUnitCapacity(1);
 			}
+			else if (_isTitans || upgraded) SetUnitCapacity(1);
 		}
 
 		// UpgradeCruiser() ???
