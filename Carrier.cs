@@ -10,7 +10,6 @@ namespace ti4_calc
 	{
 		private bool _isSol = false;
 
-		
 		public Carrier(string faction, bool upgraded = false)
 		{
 			_isSol = faction == "Sol";

@@ -1,0 +1,9 @@
+Refactor to factor in Fleet Size
+Refactor to factor in Capacity Required
+
+Can unit stats get stored elsewhere? UnitStats.cs or something?
+
+Make faction conform to a small set of strings or IDs
+
+Upgrade[Unit]() methods?
+Downgrade[Unit]() methods?

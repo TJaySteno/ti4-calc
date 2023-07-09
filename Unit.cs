@@ -7,7 +7,7 @@
 		public string Faction { get; private set; } = null;
 		public bool Upgraded { get; private set; } = false;
 
-		public int UnitCost { get; private set; } = 2;
+		public double UnitCost { get; private set; } = 2;
 		public int UnitMove { get; private set; } = 2;
 		public int UnitCapacity { get; private set; } = 0;
 		public int ReinforcementsPool { get; private set; } = 8;
@@ -40,7 +40,7 @@
 			
 
 		// For later, can some of this get stored elsewhere? UnitStats.cs or something?
-		public void SetUnitBaseStats(int unitCost, int reinforcementsPool)
+		public void SetUnitBaseStats(double unitCost, int reinforcementsPool)
 		{
 			UnitCost = unitCost;
 			ReinforcementsPool = reinforcementsPool;

@@ -12,14 +12,14 @@ namespace ti4_calc
 		{
 			try
 			{
-				Cruiser a = new Cruiser("LIZIX");
-				Cruiser aUpgraded = new Cruiser("LIZIX", true);
+				Dreadnought a = new Dreadnought("LIZIX");
+				Dreadnought aUpgraded = new Dreadnought("LIZIX", true);
 				
-				Cruiser b = new Cruiser("Sardakk");
-				Cruiser bUpgraded = new Cruiser("Sardakk", true);
+				Dreadnought b = new Dreadnought("Sardakk");
+				Dreadnought bUpgraded = new Dreadnought("Sardakk", true);
 
-				Cruiser other = new Cruiser(null); // Make faction conform to a small set of strings or IDs
-				Cruiser otherUpgraded = new Cruiser(null, true);
+				Dreadnought other = new Dreadnought(null); // Make faction conform to a small set of strings or IDs
+				Dreadnought otherUpgraded = new Dreadnought(null, true);
 
 				Console.WriteLine(a.GetAllUnitStats());
 				Console.WriteLine(aUpgraded.GetAllUnitStats());

@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace ti4_calc
 {
+	class CannotBuildWarSunException : Exception
+	{
+		public CannotBuildWarSunException()
+		{
+
+		}
+
+		public CannotBuildWarSunException(string message)
+		{
+
+		}
+	}
+
 	class TI4CalculatorException : Exception
 	{
 		public TI4CalculatorException()

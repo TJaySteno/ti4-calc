@@ -51,6 +51,8 @@
     <Compile Include="Destroyer.cs" />
     <Compile Include="Dreadnaught.cs" />
     <Compile Include="Exception.cs" />
+    <Compile Include="Fighter.cs" />
+    <Compile Include="Flagship.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Tech.cs" />
     <Compile Include="Unit.cs" />
@@ -58,13 +60,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Combat.cs" />
     <Compile Include="AntiFtrBarrage.cs" />
+    <Compile Include="WarSun.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="combatNotes.txt" />
-    <Content Include="unitNotes.txt" />
+    <Content Include="refactorNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
