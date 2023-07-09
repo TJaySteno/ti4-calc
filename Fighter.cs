@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ti4_calc
+﻿namespace ti4_calc
 {
 	internal class Fighter : Unit
 	{
-		private bool _isNaalu = false;
+		private readonly bool _isNaalu = false;
 
 		public Fighter(string faction, bool upgraded = false)
 		{

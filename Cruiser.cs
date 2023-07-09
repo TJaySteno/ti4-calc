@@ -2,7 +2,8 @@
 {
 	internal class Cruiser : Unit
 	{
-		private bool _isTitans = false;
+		private readonly bool _isTitans = false;
+
 		public Cruiser(string faction, bool upgraded = false)
 		{
 			_isTitans = faction == "Titans";

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ti4_calc
+﻿namespace ti4_calc
 {
 	internal class Carrier : Unit
 	{
-		private bool _isSol = false;
+		private readonly bool _isSol = false;
 
 		public Carrier(string faction, bool upgraded = false)
 		{

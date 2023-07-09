@@ -53,6 +53,7 @@
     <Compile Include="Exception.cs" />
     <Compile Include="Fighter.cs" />
     <Compile Include="Flagship.cs" />
+    <Compile Include="Infantry.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Tech.cs" />
     <Compile Include="Unit.cs" />
