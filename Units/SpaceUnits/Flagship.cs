@@ -5,7 +5,7 @@
 		public Flagship(string faction, bool upgraded = false)
 		{
 			// Constants
-			SetUnitBaseStats(8, 1);
+			SetUnitBaseStats(faction, upgraded, 8, 1);
 			ActivateSustainDamage();
 
 			// SetUnitMove
@@ -32,7 +32,7 @@
 			// SetSpecialText
 			if (faction == "Arborec") SetSpecialText("After you activate this system, you may produce up to 5 units in this system.");
 			if (faction == "Argent") SetSpecialText("Other players cannot use SPACE CANNON against your ships in this system.");
-				// ActivateBypassSpaceCannon()???
+				// ActivateBypassSpace Cannon()???
 			if (faction == "Barony") SetSpecialText("Other players' units in this system lose PLANETARY SHIELD. At the start of each space combat round, repair this ship.");
 			if (faction == "Keleres") SetSpecialText("Other players must spend 2 influence to activate the system that contains this ship.");
 			if (faction == "Muaat") SetSpecialText("ACTION: Spend 1 token from your strategy pool to place 1 cruiser in this unit's system.");
@@ -59,13 +59,13 @@
 			// SetSpecialAttack
 			if (faction == "Saar")
 			{
-				SetSpecialAttackType("AFB");
+				SetSpecialAttackType("Anti-Fighter Barrage");
 				SetSpecialAttackToHit(6);
 				SetSpecialAttackNumberOfDice(4);
 			}
 			if (faction == "Nomad")
 			{
-				SetSpecialAttackType("AFB");
+				SetSpecialAttackType("Anti-Fighter Barrage");
 				SetSpecialAttackNumberOfDice(3);
 
 				if (upgraded) SetSpecialAttackToHit(5);
@@ -73,25 +73,30 @@
 			}
 			if (faction == "Barony")
 			{
-				SetSpecialAttackType("Bombard");
+				SetSpecialAttackType("Bombardment");
 				SetSpecialAttackToHit(5);
 				SetSpecialAttackNumberOfDice(3);
 			}
 			if (faction == "Cabal")
 			{
-				SetSpecialAttackType("Bombard");
+				SetSpecialAttackType("Bombardment");
 				SetSpecialAttackToHit(5);
 				SetSpecialAttackNumberOfDice(1);
 			}
 			if (faction == "Xxcha")
 			{
-				SetSpecialAttackType("SpaceCannon");
+				SetSpecialAttackType("Space Cannon");
 				SetSpecialAttackToHit(5);
 				SetSpecialAttackNumberOfDice(3);
 			}
 
 			// ActivateBypassPlanetaryShield
 			if (faction == "Barony") ActivateBypassPlanetaryShield();
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		// UpgradeFlagship() ???

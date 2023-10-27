@@ -12,14 +12,15 @@
 			_isLIZIX = faction == "LIZIX";
 			_isLIZIXUpgraded = faction == "LIZIX" && upgraded;
 
-			SetUnitBaseStats(4, 5);
+			SetUnitBaseStats(faction, upgraded, 4, 5);
 			SetCombatToHit(_isLIZIXUpgraded ? 4 : 5);
+			SetCombatNumberOfDice(1);
 			SetUnitMove(upgraded ? 2 : 1);
 			SetUnitCapacity(_isLIZIX ? 2 : 1);
 
 			ActivateSustainDamage();
 
-			SetSpecialAttackType("Bombard");
+			SetSpecialAttackType("Bombardment");
 			SetSpecialAttackToHit(_isSardakk || _isLIZIXUpgraded ? 4 : 5);
 			SetSpecialAttackNumberOfDice(_isSardakk ? 2 : 1);
 
@@ -29,6 +30,11 @@
 
 				if (_isSardakk) AppendSpecialText("After a round of space combat, you may destroy this unit to destroy up to 2 ships in this system.");
 			}
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		// UpgradeDreadnought() ???

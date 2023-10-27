@@ -12,7 +12,7 @@
 
 			if (!_isMuaat && !upgraded) { throw new CannotBuildWarSunException("War Suns cannot be built until the War Sun Technology is researched."); }
 
-			SetUnitBaseStats(_isMuaatUpgraded ? 10 : 12, 2);
+			SetUnitBaseStats(faction, upgraded, _isMuaatUpgraded ? 10 : 12, 2);
 			SetCombatToHit(3);
 			SetCombatNumberOfDice(3);
 			SetUnitCapacity(6);
@@ -22,7 +22,7 @@
 			ActivateBypassPlanetaryShield();
 
 			// SetSpecialAttack
-			SetSpecialAttackType("Bombard");
+			SetSpecialAttackType("Bombardment");
 			SetSpecialAttackToHit(3);
 			SetSpecialAttackNumberOfDice(3);
 
@@ -30,6 +30,11 @@
 			if (_isMuaatUpgraded) SetUnitMove(3);
 			else if (upgraded) SetUnitMove(2);
 			else if (_isMuaat) SetUnitMove(1);
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		// UpgradeWarSun() ???

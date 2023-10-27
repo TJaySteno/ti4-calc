@@ -14,8 +14,10 @@ namespace ti4_calc
 		{
 			_isTitans = faction == "Titans";
 
+			SetUnitBaseStats(faction, upgraded, 0, 6);
 			ActivatePlanetaryShield();
-			SetSpecialAttackType("SpaceCannon");
+			
+			SetSpecialAttackType("Space Cannon");
 			SetSpecialAttackToHit(upgraded ? 6 : 5);
 			SetSpecialAttackNumberOfDice(1);
 
@@ -24,9 +26,15 @@ namespace ti4_calc
 			if (_isTitans)
 			{
 				SetCombatToHit(upgraded ? 7 : 6);
+				SetCombatNumberOfDice(1);
 				ActivateSustainDamage();
 				SetSpecialText("This unit is treated as both a structure and a ground force. It cannot be transported. Production 1.");
 			}
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new NotImplementedException();
 		}
 
 		// UpgradeCruiser() ???

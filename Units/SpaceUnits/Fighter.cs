@@ -8,7 +8,8 @@
 		{
 			_isNaalu = faction == "Naalu";
 
-			SetUnitBaseStats(0.5, 10);
+			SetUnitBaseStats(faction, upgraded, 0.5, 10);
+			SetCombatNumberOfDice(1);
 
 			if (upgraded && _isNaalu) SetCombatToHit(7);
 			else if (upgraded || _isNaalu) SetCombatToHit(8);
@@ -24,6 +25,9 @@
 			else SetUnitMove(0);
 		}
 
-		// UpgradeFighter() ???
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

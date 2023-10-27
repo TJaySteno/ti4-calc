@@ -4,8 +4,9 @@
 	{
 		public Mech(string faction, bool revised = false)
 		{
-			SetUnitBaseStats(6, 4);
+			SetUnitBaseStats(faction, false, 6, 4);
 			SetCombatToHit(6);
+			// SetCombatNumberOfDice(1);
 			ActivateSustainDamage();
 
 			if (faction == "Arborec") SetSpecialText("DEPLOY: When you use MITOSIS faction ability you may replace 1 of your infantry with 1 mech from your reinforcements instead. Production 2.");
@@ -41,19 +42,24 @@
 			// Otherwise, just add a +2 modifier in SpaceCombat.cs?
 			if (faction == "Naaz")
 			{
-				SetSpecialAttackType("SpaceCombat");
+				SetSpecialAttackType("Space Combat");
 				SetSpecialAttackToHit(8);
 				SetSpecialAttackNumberOfDice(2);
 			}
 			if (faction == "LIZIX" || faction == "Xxcha")
 			{
-				SetSpecialAttackType("Bombard");
+				SetSpecialAttackType("Bombardment");
 				SetSpecialAttackToHit(8);
 				SetSpecialAttackNumberOfDice(1);
 			}
 
 			// ActivatePlanetaryShield
 			if (faction == "Arborec") ActivatePlanetaryShield();
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

@@ -13,9 +13,9 @@
 	}
 
 	RunGroundCombat() {
-		Bombardment();
+		Bombardmentment();
 		CommitGroundForces();
-		SpaceCannonDefense();
+		Space CannonDefense();
 	}
 }
 
@@ -26,12 +26,12 @@ CombatAntiFtrBarrage : Combat {
 	private int numberOfDice = 1;
 }
 
-CombatBombardment : Combat {
+CombatBombardmentment : Combat {
 	private int toHit;
 	private int numberOfDice = 1;
 }
 
-CombatSpaceCannon : Combat {
+CombatSpace Cannon : Combat {
 	private int toHit;
 	private int numberOfDice = 1;
 }

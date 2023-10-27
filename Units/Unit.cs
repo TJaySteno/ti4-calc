@@ -1,50 +1,61 @@
 ﻿namespace ti4_calc
 {
-	internal class Unit
+	public abstract class Unit
 	{
-		// Default: Cruiser I
 		public bool IsActive { get; private set; } = true;
 		public string Faction { get; private set; } = null;
 		public bool Upgraded { get; private set; } = false;
 
-		public double UnitCost { get; private set; } = 2;
-		public int UnitMove { get; private set; } = 2;
+		public double UnitCost { get; private set; }
+		public int UnitMove { get; private set; }
 		public int UnitCapacity { get; private set; } = 0;
-		public int ReinforcementsPool { get; private set; } = 8;
+		public int ReinforcementsPool { get; private set; }
 
-		public int CombatToHit { get; private set; } = 7;
-		public int CombatNumberOfDice { get; private set; } = 1;
+		public int CombatToHit { get; private set; }
+		public int CombatNumberOfDice { get; private set; }
 
-		public bool CanSustainDamage { get; private set; } = false;
-		public bool SustainedDamage { get; private set; } = false;
+		public bool CanSustainDamage { get; private set; }
+		public bool SustainedDamage { get; private set; }
 
-		public bool HasPlanetaryShield { get; private set; } = false;
-		public bool CanBypassPlanetaryShield { get; private set; } = false;
+		public bool HasPlanetaryShield { get; private set; }
+		public bool CanBypassPlanetaryShield { get; private set; }
 
-		public string SpecialText { get; private set; } = null;
+		public string SpecialText { get; private set; }
 
 		public string SpecialAttackType { get; private set; } = null;
-		public int SpecialAttackToHit { get; private set; } = 0;
-		public int SpecialAttackNumberOfDice { get; private set; } = 0;
+		public int SpecialAttackToHit { get; private set; }
+		public int SpecialAttackNumberOfDice { get; private set; }
+
+		private string GetSpecialAttack()
+		{
+			return (SpecialAttackType != null
+				? $"{SpecialAttackType}: {SpecialAttackToHit}(x{SpecialAttackNumberOfDice}), "
+				: "");
+		}
+
+		private string GetOtherStats()
+		{
+			return
+				(CanSustainDamage ? "Sustain Damage, " : "") +
+				(HasPlanetaryShield ? "Planetary Shield, " : "") +
+				(CanBypassPlanetaryShield ? "Bypasses Planetary Shield, " : "");
+		}
 
 		public string GetAllUnitStats()
 		{
 			return
-				$"UnitMove: {UnitMove}, " +
-				$"UnitCapacity: {UnitCapacity}, " +
-				$"CombatToHit: {CombatToHit}, " +
-				$"CombatNumberOfDice: {CombatNumberOfDice}, " +
-				$"CanSustainDamage: {CanSustainDamage}, " +
-				$"SpecialText: {SpecialText}, " +
-				$"SpecialAttackType: {SpecialAttackType}, " +
-				$"SpecialAttackToHit: {SpecialAttackToHit}, " +
-				$"SpecialAttackNumberOfDice: {SpecialAttackNumberOfDice}";
+				$"Cost: {UnitCost}, Combat: {CombatToHit}(x{CombatNumberOfDice}), Move: {UnitMove}, Capacity: {UnitCapacity}, " +
+				GetSpecialAttack() +
+				GetOtherStats() +
+				$"Others: {Faction}, " + (Upgraded ? "Upgraded, " : "") + $"Reinforcements: {ReinforcementsPool}";
+				// + $"SpecialText: {SpecialText}";
 		}
-			
 
 		// For later, can some of this get stored elsewhere? UnitStats.cs or something?
-		public void SetUnitBaseStats(double unitCost, int reinforcementsPool)
+		public void SetUnitBaseStats(string faction, bool upgraded, double unitCost, int reinforcementsPool)
 		{
+			Faction = faction;
+			Upgraded = upgraded;
 			UnitCost = unitCost;
 			ReinforcementsPool = reinforcementsPool;
 		}
@@ -61,11 +72,13 @@
 		public void ActivateBypassPlanetaryShield() => CanBypassPlanetaryShield = true;
 
 		public void SetSpecialText(string specialText) => SpecialText = specialText;
-		public void AppendSpecialText(string specialText) => SpecialText += "; " + specialText;
+		public void AppendSpecialText(string specialText) => SpecialText += " " + specialText;
 
 		public void SetSpecialAttackType(string specialAttackType) => SpecialAttackType = specialAttackType;
 		public void SetSpecialAttackToHit(int specialAttackToHit) => SpecialAttackToHit = specialAttackToHit;
 		public void SetSpecialAttackNumberOfDice(int specialAttackNumberOfDice) => SpecialAttackNumberOfDice = specialAttackNumberOfDice;
+
+		public abstract Unit Clone(string faction, bool upgraded = false);
 
 		// Methods?
 		public void DamageUnit()

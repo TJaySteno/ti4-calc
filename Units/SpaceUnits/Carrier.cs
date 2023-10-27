@@ -8,8 +8,9 @@
 		{
 			_isSol = faction == "Sol";
 
-			SetUnitBaseStats(3, 4);
+			SetUnitBaseStats(faction, upgraded, 3, 4);
 			SetCombatToHit(9);
+			SetCombatNumberOfDice(1);
 
 			if (upgraded) SetUnitMove(2);
 			else SetUnitMove(1);
@@ -23,6 +24,9 @@
 			else SetUnitCapacity(4);
 		}
 
-		// UpgradeCarrier() ???
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

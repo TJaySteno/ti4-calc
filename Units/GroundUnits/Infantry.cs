@@ -12,7 +12,8 @@
 			_isMehact = faction == "Mehact";
 			_isSol = faction == "Sol";
 
-			SetUnitBaseStats(0.5, 12);
+			SetUnitBaseStats(faction, upgraded, 0.5, 12);
+			SetCombatNumberOfDice(1);
 
 			// SetCombatToHit
 			if (_isSol && upgraded) SetCombatToHit(6);
@@ -28,6 +29,11 @@
 			else if (upgraded) SetSpecialText("After this unit is destroyed, roll 1 die. If the result is 6 or greater, place the unit on this card. At the start of your next turn, place each unit that is on this card on a planet you control in your home system.");
 
 			if (_isArborec) AppendSpecialText(upgraded ? "Production 2." : "Production 1.");
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		// UpgradeInfantry() ???

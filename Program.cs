@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ti4_calc
 {
@@ -8,23 +9,19 @@ namespace ti4_calc
 		{
 			try
 			{
-				Dreadnought a = new Dreadnought("LIZIX");
-				Dreadnought aUpgraded = new Dreadnought("LIZIX", true);
+				Calculator calc = new Calculator();
 				
-				Dreadnought b = new Dreadnought("Sardakk");
-				Dreadnought bUpgraded = new Dreadnought("Sardakk", true);
+				Player Player1 = new Player("Sol");
+				Player Player2 = new Player("Muaat");
 
-				Dreadnought other = new Dreadnought(null); // Make faction conform to a small set of strings or IDs
-				Dreadnought otherUpgraded = new Dreadnought(null, true);
+				// I have to declare Upgraded twice in the method. Should I just store upgraded on IUnit and not PlayerUnit?
+				Player1.AddNewUnitType("Cruiser", 8, new Cruiser(Player1.Faction, false));
+				Player2.AddNewUnitType("Cruiser", 8, new Cruiser(Player1.Faction, true));
 
-				Console.WriteLine(a.GetAllUnitStats());
-				Console.WriteLine(aUpgraded.GetAllUnitStats());
+				calc.DoBattle(Player1, Player2);
 
-				Console.WriteLine(b.GetAllUnitStats());
-				Console.WriteLine(bUpgraded.GetAllUnitStats());
-
-				Console.WriteLine(other.GetAllUnitStats());
-				Console.WriteLine(otherUpgraded.GetAllUnitStats());
+				Console.WriteLine("Player 1: " + Player1.PlayerUnits.Count);
+				Console.WriteLine("Player 2: " + Player2.PlayerUnits.Count);
 			}
 			catch (Exception ex)
 			{

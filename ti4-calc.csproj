@@ -44,32 +44,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carrier.cs" />
-    <Compile Include="CombatBombardment.cs" />
-    <Compile Include="CombatSpaceCannon.cs" />
-    <Compile Include="Cruiser.cs" />
-    <Compile Include="Destroyer.cs" />
-    <Compile Include="Dreadnaught.cs" />
+    <Compile Include="Player\PlayerUnit.cs" />
+    <Compile Include="Units\SpaceUnits\Carrier.cs" />
+    <Compile Include="Combat\CombatBombardment.cs" />
+    <Compile Include="Combat\CombatSpaceCannon.cs" />
+    <Compile Include="Units\SpaceUnits\Cruiser.cs" />
+    <Compile Include="Units\SpaceUnits\Destroyer.cs" />
+    <Compile Include="Units\SpaceUnits\Dreadnought.cs" />
     <Compile Include="Exception.cs" />
-    <Compile Include="Fighter.cs" />
-    <Compile Include="Flagship.cs" />
-    <Compile Include="Infantry.cs" />
-    <Compile Include="Mech.cs" />
-    <Compile Include="PDS.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Tech.cs" />
-    <Compile Include="Unit.cs" />
+    <Compile Include="Units\SpaceUnits\Fighter.cs" />
+    <Compile Include="Units\SpaceUnits\Flagship.cs" />
+    <Compile Include="Units\GroundUnits\Infantry.cs" />
+    <Compile Include="Units\IUnit.cs" />
+    <Compile Include="Units\GroundUnits\Mech.cs" />
+    <Compile Include="Units\Structures\PDS.cs" />
+    <Compile Include="Player\Player.cs" />
+    <Compile Include="Units\Unit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Combat.cs" />
-    <Compile Include="AntiFtrBarrage.cs" />
-    <Compile Include="WarSun.cs" />
+    <Compile Include="Calculator.cs" />
+    <Compile Include="Combat\AntiFtrBarrage.cs" />
+    <Compile Include="Units\SpaceUnits\WarSun.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="combatNotes.txt" />
+    <Content Include="Combat\combatNotes.txt" />
     <Content Include="refactorNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

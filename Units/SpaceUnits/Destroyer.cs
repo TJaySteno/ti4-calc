@@ -8,9 +8,9 @@
 		{
 			_isArgent = faction == "Argent";
 
-			SetUnitBaseStats(1, 8);
+			SetUnitBaseStats(faction, upgraded, 1, 8);
 			SetUnitMove(2);
-			SetSpecialAttackType("AFB");
+			SetSpecialAttackType("Anti-Fighter Barrage");
 
 			SetUnitCapacity(_isArgent ? 1 : 0);
 
@@ -26,6 +26,11 @@
 			// SpecialText for this specialAttack. Implement in AFB class.
 			else if (_isArgent || upgraded) SetCombatToHit(8);
 			else SetCombatToHit(9);
+		}
+
+		public override Unit Clone(string faction, bool upgraded = false)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		// UpgradeDestroyer() ???

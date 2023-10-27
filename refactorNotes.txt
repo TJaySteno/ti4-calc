@@ -8,11 +8,14 @@ Make faction conform to a small set of strings or IDs
 Upgrade[Unit]() methods?
 Downgrade[Unit]() methods?
 
-Flagship: ActivateBypassSpaceCannon()???
+Flagship: ActivateBypassSpace Cannon()???
 	or factor in in SpaceCombat.cs?
 
 CombatToHit should default to 11 so that Combat.cs can make a check "if toHit < 11".
 	Important for Titan PDS
 
-ActivateBypassSpaceCannon()???
+ActivateBypassSpace Cannon()???
 	Argent Flagship
+
+Polymorphism for units instead of all of these if/else statements
+	cSharpNotes>objects>notes.cs
