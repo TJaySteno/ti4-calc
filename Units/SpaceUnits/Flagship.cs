@@ -1,4 +1,4 @@
-﻿namespace ti4_calc
+﻿/*namespace ti4_calc
 {
 	internal class Flagship : Unit
 	{
@@ -102,3 +102,4 @@
 		// UpgradeFlagship() ???
 	}
 }
+*/

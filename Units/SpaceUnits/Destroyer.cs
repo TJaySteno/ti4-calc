@@ -1,4 +1,4 @@
-﻿namespace ti4_calc
+﻿/*namespace ti4_calc
 {
 	internal class Destroyer : Unit
 	{
@@ -36,3 +36,4 @@
 		// UpgradeDestroyer() ???
 	}
 }
+*/

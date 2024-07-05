@@ -7,22 +7,23 @@ namespace ti4_calc
 	internal class Player
 	{
 		internal string Faction { get; private set; }
-		internal List<PlayerUnit> PlayerUnits = new List<PlayerUnit>();
-		
+		internal int Wins { get; private set; } = 0;
 		internal Player(string faction) { Faction = faction; }
 
+		internal List<PlayerUnit> Fleet = new List<PlayerUnit>();
 
-		public void AddNewUnitType(string unitName, int count, IUnit unit)
+		public void AddWin() => Wins++;
+
+		public void UpdatePlayerUnitCount(int count, IUnit unitNew)
 		{
-			if (PlayerUnits.Exists(u => u.UnitName == unitName))
-			{
-				Console.Write("Player.AddNewUnitType: This unit already exists for this player.");
-				return;
-			}
-			PlayerUnits.Add(new PlayerUnit(unitName, count, unit));
-		}
+			// Ensure we aren't adding two of the same unit.
+			bool unitAlreadyExists = Fleet.Exists(unitCur => unitCur.Unit.Name == unitNew.Name);
 
-		// Removes the entire unit type for a given UnitName. Not sure if this is needed though.
-		// public void RemoveUnits(string unitName) { }
+			if (unitAlreadyExists) {
+				throw new Exception("Only one stack per type of unit per player can be added.");
+			}
+
+			Fleet.Add(new PlayerUnit(count, unitNew));
+		}
 	}
 }

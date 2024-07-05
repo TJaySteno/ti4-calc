@@ -1,4 +1,4 @@
-﻿namespace ti4_calc
+﻿/*namespace ti4_calc
 {
 	internal class Fighter : Unit
 	{
@@ -31,3 +31,4 @@
 		}
 	}
 }
+*/

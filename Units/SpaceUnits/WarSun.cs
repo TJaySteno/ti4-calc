@@ -1,4 +1,4 @@
-﻿namespace ti4_calc
+﻿/*namespace ti4_calc
 {
 	internal class WarSun : Unit
 	{
@@ -40,3 +40,4 @@
 		// UpgradeWarSun() ???
 	}
 }
+*/

@@ -12,26 +12,23 @@
 	
 	interface IUnit
 	{
-		int Health { get; }
-		int CombatHealth { get; }
-		bool IsDestroyed { get; }
-
-		int Cost { get; }
-		int Move { get; }
-		int Capacity { get; }
-
+		string Name { get; }
 		int ToHit { get; }
-		int NumberOfCombatDice { get; }
-		int Reinforcements { get; }
+
+		// int Reinforcements { get; }
+		// int Capacity { get; }
+		// int NumberOfCombatDice { get; }
 
 		// bool HasPlanetaryShield { get; }
 		// bool CanBypassPlanetaryShield { get; }
 
 		// string SpecialText { get; }
 
-		bool DamageUnit(bool directHit = false); // Returns true if unit is destroyed.
-		void UpgradeUnit();
-		void DowngradeUnit();
+		// int Cost { get; }
+		// int Move { get; }
+		
+		// void UpgradeUnits();
+		// void DowngradeUnits();
 
 		// UseSustainDamage()
 		// ResetSustainDamage()
