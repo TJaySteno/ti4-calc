@@ -1,34 +1,32 @@
-﻿/*namespace ti4_calc
+﻿namespace ti4_calc
 {
-	internal class Fighter : Unit
+	internal class Fighter : IShip, ICapacityCost
 	{
-		private readonly bool _isNaalu = false;
+		// IShip properties
+		public string Name { get; } = "Fighter";
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 10;
+		public double Cost { get; } = 0.5;
+		public int Capacity { get; private set; } = 4;
+
+		public int CombatToHit { get; } = 9;
+		public int CombatDiceCount { get; } = 1;
+		public bool SpecialAbilitySustainDamage { get; private set; } = false;
+		// IShip properties
+
+
+		// ICapacityCost properties
+		public int CapacityCost { get; } = 1;
+		// ICapacityCost properties
+
 
 		public Fighter(string faction, bool upgraded = false)
 		{
-			_isNaalu = faction == "Naalu";
+			Upgraded = upgraded;
 
-			SetUnitBaseStats(faction, upgraded, 0.5, 10);
-			SetCombatNumberOfDice(1);
+			// Upgrade logic
 
-			if (upgraded && _isNaalu) SetCombatToHit(7);
-			else if (upgraded || _isNaalu) SetCombatToHit(8);
-			else SetCombatToHit(9);
-
-			if (upgraded) {
-				SetUnitMove(2);
-				
-				SetSpecialText("This unit may move without being transported.");
-				if (_isNaalu) { AppendSpecialText("Each fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."); }
-				else { AppendSpecialText("Each fighter in excess of your ships' capacity counts as 1/2 of a ship against your fleet pool."); }
-			}
-			else SetUnitMove(0);
-		}
-
-		public override Ship Clone(string faction, bool upgraded = false)
-		{
-			throw new System.NotImplementedException();
+			// Faction logic
 		}
 	}
 }
-*/

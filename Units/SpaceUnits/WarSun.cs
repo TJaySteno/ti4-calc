@@ -1,43 +1,44 @@
-﻿/*namespace ti4_calc
+﻿using System;
+
+using ti4_calc.SpecialAbilities;
+
+namespace ti4_calc
 {
-	internal class WarSun : Unit
+	internal class WarSun : IShip, IBombardment
 	{
-		private readonly bool _isMuaat = false;
-		private readonly bool _isMuaatUpgraded = false;
+		// IShip properties
+		public string Name { get; } = "War Sun";
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 2;
+		public double Cost { get; private set; } = 12;
+		public int Capacity { get; } = 6;
+
+		public int CombatToHit { get; } = 3;
+		public int CombatDiceCount { get; } = 3;
+		public bool SpecialAbilitySustainDamage { get; } = true;
+		// IShip properties
+
+
+		// IBombardment properties
+		public int BombardToHit { get; } = 3;
+		public int BombardDiceCount { get; } = 3;
+		// IBombardment properties
+
+
+		// Other Properties
+		public bool BypassPlanetaryShield { get; } = true;
+		// Other Properties
 
 		public WarSun(string faction, bool upgraded = false)
 		{
-			_isMuaat = faction == "Muaat";
-			_isMuaatUpgraded = faction == "Muaat" && upgraded;
-
-			if (!_isMuaat && !upgraded) { throw new CannotBuildWarSunException("War Suns cannot be built until the War Sun Technology is researched."); }
-
-			SetUnitBaseStats(faction, upgraded, _isMuaatUpgraded ? 10 : 12, 2);
-			SetCombatToHit(3);
-			SetCombatNumberOfDice(3);
-			SetUnitCapacity(6);
-			ActivateSustainDamage();
+			if (faction != "Muaat" && !upgraded)
+				throw new Exception("Unupgraded War Suns are not available to this faction.");
 			
-			SetSpecialText("Other players' units in this system lose their Planetary Shield ability");
-			ActivateBypassPlanetaryShield();
+			Upgraded = upgraded;
 
-			// SetSpecialAttack
-			SetSpecialAttackType("Bombardment");
-			SetSpecialAttackToHit(3);
-			SetSpecialAttackNumberOfDice(3);
+			// Upgrade logic
 
-			// SetUnitMove
-			if (_isMuaatUpgraded) SetUnitMove(3);
-			else if (upgraded) SetUnitMove(2);
-			else if (_isMuaat) SetUnitMove(1);
+			// Faction logic
 		}
-
-		public override Ship Clone(string faction, bool upgraded = false)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		// UpgradeWarSun() ???
 	}
 }
-*/

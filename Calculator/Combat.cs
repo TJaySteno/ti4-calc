@@ -22,6 +22,9 @@ namespace ti4_calc
 
 		private int RollToHit(int numberOfDice, int toHit)
 		{
+			// Implement Player.FactionCombatModifier
+			// JolNaar Mech affects this too
+			
 			int numberOfHits = 0;
 			while (numberOfDice > 0)
 			{
@@ -125,8 +128,10 @@ namespace ti4_calc
 			_attackingFleet = attacker.Fleet;
 			_defendingFleet = defender.Fleet;
 
-			// Bombardment/PDS/AFB placeholder
+			// Pre-combat
+			// Attacks (Bombardment, PDS, AFB)
 
+			// Regular combat
 			while (_combatStatus == "Ongoing")
 			{ 
 				_combatStatus = RoundOfCombat(attacker, defender);

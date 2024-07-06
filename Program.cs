@@ -14,15 +14,24 @@ namespace ti4_calc
 				Results results = new Results(attacker, defender);
 
 				int _draws = 0;
-				int _numberOfRounds = 5000;
+				int _numberOfRounds = 10000;
 
 				// Attacker's fleet
-				attacker.UpdatePlayerShipCount(8, new Cruiser(attacker.Faction));
-				//attacker.UpdatePlayerShipCount(1, new Dreadnought(attacker.Faction));
+				attacker.UpdatePlayerShipCount(4, new Carrier(attacker.FactionNameShort));
+				attacker.UpdatePlayerShipCount(8, new Cruiser(attacker.FactionNameShort));
+				attacker.UpdatePlayerShipCount(8, new Destroyer(attacker.FactionNameShort));
+				attacker.UpdatePlayerShipCount(5, new Dreadnought(attacker.FactionNameShort));
+				attacker.UpdatePlayerShipCount(10, new Fighter(attacker.FactionNameShort));
+				attacker.UpdatePlayerShipCount(2, new WarSun(attacker.FactionNameShort, true));
 
 				// Defender's fleet
-				//defender.UpdatePlayerShipCount(7, new Cruiser(defender.Faction));
-				defender.UpdatePlayerShipCount(5, new Dreadnought(defender.Faction));
+				// Later: Nebula bonus
+				defender.UpdatePlayerShipCount(4, new Carrier(defender.FactionNameShort));
+				defender.UpdatePlayerShipCount(8, new Cruiser(defender.FactionNameShort));
+				defender.UpdatePlayerShipCount(8, new Destroyer(defender.FactionNameShort));
+				defender.UpdatePlayerShipCount(5, new Dreadnought(defender.FactionNameShort));
+				defender.UpdatePlayerShipCount(10, new Fighter(defender.FactionNameShort));
+				defender.UpdatePlayerShipCount(2, new WarSun(defender.FactionNameShort, true));
 
 				for (int i = 0; i < _numberOfRounds; i++)
 				{

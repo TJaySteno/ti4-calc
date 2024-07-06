@@ -8,7 +8,7 @@ namespace ti4_calc
 		public string Name { get; } = "Dreadnought";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 5;
-		public int Cost { get; } = 4;
+		public double Cost { get; } = 4;
 		public int Capacity { get; private set; } = 1;
 
 		public int CombatToHit { get; private set; } = 5;
@@ -31,6 +31,8 @@ namespace ti4_calc
 		public Dreadnought(string faction, bool upgraded = false)
 		{
 			Upgraded = upgraded;
+
+			// Upgrade logic
 
 			// Faction logic
 		}

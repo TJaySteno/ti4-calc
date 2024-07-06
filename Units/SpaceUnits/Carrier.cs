@@ -1,33 +1,27 @@
-﻿/*namespace ti4_calc
+﻿namespace ti4_calc
 {
-	internal class Carrier : Unit
+	internal class Carrier : IShip
 	{
-		private readonly bool _isSol = false;
+		// IShip properties
+		public string Name { get; } = "Carrier";
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 4;
+		public double Cost { get; } = 3;
+		public int Capacity { get; private set; } = 4;
+
+		public int CombatToHit { get; } = 9;
+		public int CombatDiceCount { get; } = 1;
+		public bool SpecialAbilitySustainDamage { get; private set; } = false;
+		// IShip properties
+
 
 		public Carrier(string faction, bool upgraded = false)
 		{
-			_isSol = faction == "Sol";
+			Upgraded = upgraded;
 
-			SetUnitBaseStats(faction, upgraded, 3, 4);
-			SetCombatToHit(9);
-			SetCombatNumberOfDice(1);
+			// Upgrade logic
 
-			if (upgraded) SetUnitMove(2);
-			else SetUnitMove(1);
-
-			if (_isSol && upgraded)
-			{
-				SetUnitCapacity(8);
-				ActivateSustainDamage();
-			}
-			else if (_isSol || upgraded) SetUnitCapacity(6);
-			else SetUnitCapacity(4);
-		}
-
-		public override Ship Clone(string faction, bool upgraded = false)
-		{
-			throw new System.NotImplementedException();
+			// Faction logic
 		}
 	}
 }
-*/

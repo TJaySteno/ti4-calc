@@ -29,9 +29,7 @@ namespace ti4_calc
 
 		// Returns a negative number if there are still hits remaining after sustaining damage.
 		public int SustainDamage(int hits)
-		{
-			return CanSustainDamage -= hits;
-		}
+			=> CanSustainDamage -= hits;
 			
 
 		// Returns a negative number if there are still hits remaining after losing units.

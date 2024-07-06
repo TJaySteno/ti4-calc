@@ -1,39 +1,33 @@
-﻿/*namespace ti4_calc
+﻿namespace ti4_calc
 {
-	internal class Destroyer : Unit
+	internal class Destroyer : IShip, IAntiFighterBarrage
 	{
-		private readonly bool _isArgent = false;
+		// IShip properties
+		public string Name { get; } = "Destroyer";
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 8;
+		public double Cost { get; } = 1;
+		public int Capacity { get; private set; } = 0;
+
+		public int CombatToHit { get; private set; } = 9;
+		public int CombatDiceCount { get; } = 1;
+		public bool SpecialAbilitySustainDamage { get; private set; } = false;
+		// IShip properties
+
+
+		// Other properties
+		public int AFBToHit { get; private set; } = 9;
+		public int AFBDiceCount { get; private set; } = 2;
+		// Other properties
+
 
 		public Destroyer(string faction, bool upgraded = false)
 		{
-			_isArgent = faction == "Argent";
+			Upgraded = upgraded;
 
-			SetUnitBaseStats(faction, upgraded, 1, 8);
-			SetUnitMove(2);
-			SetSpecialAttackType("Anti-Fighter Barrage");
+			// Upgrade logic
 
-			SetUnitCapacity(_isArgent ? 1 : 0);
-
-			if (upgraded) {
-				SetSpecialAttackToHit(6);
-				SetSpecialAttackNumberOfDice(3);
-			} else {
-				SetSpecialAttackToHit(9);
-				SetSpecialAttackNumberOfDice(2);
-			}
-
-			if (_isArgent && upgraded) SetCombatToHit(7);
-			// SpecialText for this specialAttack. Implement in AFB class.
-			else if (_isArgent || upgraded) SetCombatToHit(8);
-			else SetCombatToHit(9);
+			// Faction logic
 		}
-
-		public override Ship Clone(string faction, bool upgraded = false)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		// UpgradeDestroyer() ???
 	}
 }
-*/
