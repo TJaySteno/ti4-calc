@@ -1,17 +1,18 @@
 ﻿namespace ti4_calc
 {
-	internal class Cruiser : IUnit
+	internal class Cruiser : IShip
 	{
-		// IUnit properties
+		// IShip properties
 		public string Name { get; } = "Cruiser";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 8;
 		public int Cost { get; } = 2;
+		public int Capacity { get; private set; } = 0;
 
 		public int CombatToHit { get; private set; } = 7;
 		public int CombatDiceCount { get; } = 1;
-		public int Capacity { get; private set; } = 0;
-		// IUnit properties
+		public bool SpecialAbilitySustainDamage { get; private set; } = false;
+		// IShip properties
 
 
 

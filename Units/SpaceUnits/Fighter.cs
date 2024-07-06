@@ -25,7 +25,7 @@
 			else SetUnitMove(0);
 		}
 
-		public override Unit Clone(string faction, bool upgraded = false)
+		public override Ship Clone(string faction, bool upgraded = false)
 		{
 			throw new System.NotImplementedException();
 		}

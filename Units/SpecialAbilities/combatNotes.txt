@@ -1,4 +1,23 @@
-﻿Combat {
+﻿Assigning damage
+
+	Combat.TakeHits(fleet, hits) {
+		// Add order (e.g. hit fighters first) later on.
+		
+		while (hits exist && ships exist) {
+			// Remove units; when more hits remain, LoseUnits returns a negative number
+			hits = -Unit.LoseUnits(hits);
+				// PlayerShip.LoseUnits(int hits) => AliveCount -= hits;
+		}
+
+		return GetRemainingUnitCount(fleet);
+	}
+
+
+
+
+
+
+Combat {
 	private int toHit;
 	private int numberOfDice = 1;
 

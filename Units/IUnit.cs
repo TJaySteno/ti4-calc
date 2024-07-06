@@ -1,17 +1,16 @@
 ﻿namespace ti4_calc
 {	
-	interface IUnit
+	interface IShip
 	{
 		string Name { get; }
 		bool Upgraded { get; }
 		int Reinforcements { get; }
 		int Cost { get; }
+		int Capacity { get; }
 
 		int CombatToHit { get; }
 		int CombatDiceCount { get; }
-
-		int Capacity { get; }
-
+		bool SpecialAbilitySustainDamage { get; }
 
 		// bool HasPlanetaryShield { get; }
 		// bool CanBypassPlanetaryShield { get; }

@@ -17,12 +17,12 @@ namespace ti4_calc
 				int _numberOfRounds = 5000;
 
 				// Attacker's fleet
-				attacker.UpdatePlayerUnitCount(8, new Cruiser(attacker.Faction));
-				attacker.UpdatePlayerUnitCount(1, new Dreadnought(attacker.Faction));
+				attacker.UpdatePlayerShipCount(8, new Cruiser(attacker.Faction));
+				//attacker.UpdatePlayerShipCount(1, new Dreadnought(attacker.Faction));
 
 				// Defender's fleet
-				defender.UpdatePlayerUnitCount(1, new Cruiser(defender.Faction));
-				defender.UpdatePlayerUnitCount(5, new Dreadnought(defender.Faction));
+				//defender.UpdatePlayerShipCount(7, new Cruiser(defender.Faction));
+				defender.UpdatePlayerShipCount(5, new Dreadnought(defender.Faction));
 
 				for (int i = 0; i < _numberOfRounds; i++)
 				{
@@ -32,8 +32,8 @@ namespace ti4_calc
 					else if (_result == "Defensive Victory") defender.AddWin();
 					else if (_result == "Draw") _draws++;
 
-					attacker.Fleet.ForEach(u => u.ResetUnitCount());
-					defender.Fleet.ForEach(u => u.ResetUnitCount());
+					attacker.Fleet.ForEach(u => u.ResetPlayerShip());
+					defender.Fleet.ForEach(u => u.ResetPlayerShip());
 				}
 
 				results.Print(_draws, _numberOfRounds);

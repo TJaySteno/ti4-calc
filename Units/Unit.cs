@@ -74,7 +74,7 @@
 		// public void SetSpecialAttackToHit(int specialAttackToHit) => SpecialAttackToHit = specialAttackToHit;
 		// public void SetSpecialAttackNumberOfDice(int specialAttackNumberOfDice) => SpecialAttackNumberOfDice = specialAttackNumberOfDice;
 
-		// public abstract Unit Clone(string faction, bool upgraded = false);
+		// public abstract Ship Clone(string faction, bool upgraded = false);
 
 		// Methods?
 		*//*public void DamageUnit()

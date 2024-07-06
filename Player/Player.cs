@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ti4_calc
 {
@@ -10,14 +9,17 @@ namespace ti4_calc
 		internal int Wins { get; private set; } = 0;
 		internal Player(string faction) { Faction = faction; }
 
-		internal List<PlayerUnit> Fleet = new List<PlayerUnit>();
+		internal List<PlayerShip> Fleet = new List<PlayerShip>();
 
 		public void AddWin() => Wins++;
+
+		public bool FleetCanSustainDamage()
+			=> Fleet.Exists(u => u.CanSustainDamage > 0);
 
 		private int GetFleetCost()
 		{
 			int cost = 0;
-			Fleet.ForEach(u => cost += u.StartingCount * u.Unit.Cost);
+			Fleet.ForEach(u => cost += u.Count * u.Ship.Cost);
 			return cost;
 		}
 
@@ -36,10 +38,10 @@ namespace ti4_calc
 			return fleetString;
 		}
 
-		public void UpdatePlayerUnitCount(int count, IUnit unitNew)
+		public void UpdatePlayerShipCount(int count, IShip unitNew)
 		{
 			// Ensure we aren't adding two of the same unit.
-			bool unitAlreadyExists = Fleet.Exists(unitCur => unitCur.Unit.Name == unitNew.Name);
+			bool unitAlreadyExists = Fleet.Exists(unitCur => unitCur.Ship.Name == unitNew.Name);
 			bool checkReinforcements = unitNew.Reinforcements >= count;
 
 			if (unitAlreadyExists)
@@ -52,7 +54,7 @@ namespace ti4_calc
 				throw new Exception($"Not enough reinforcements for {unitNew.Name}. Max: {unitNew.Reinforcements}.");
 			}
 
-			Fleet.Add(new PlayerUnit(count, unitNew));
+			Fleet.Add(new PlayerShip(count, unitNew));
 		}
 	}
 }

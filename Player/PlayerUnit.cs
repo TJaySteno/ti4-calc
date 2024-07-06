@@ -1,25 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ti4_calc
 {
-	public class PlayerUnit
+	public class PlayerShip
 	{
-		internal int StartingCount { get; }
-		internal int CurrentCount { get; private set; }
-		internal IUnit Unit { get; private set; }
+		internal int Count { get; private set; }
+		internal int AliveCount { get; private set; }
+		internal int CanSustainDamage { get; private set; } = 0;
+		
+		internal IShip Ship { get; private set; }
 
-		internal PlayerUnit(int count, IUnit unit)
+		internal PlayerShip(int count, IShip unit)
 		{
-			StartingCount = count;
-			CurrentCount = count;
-			Unit = unit;
+			Count = count;
+			AliveCount = count;
+			if (unit.SpecialAbilitySustainDamage)
+				CanSustainDamage = count;
+
+			Ship = unit;
 		}
 
-		public int ResetUnitCount() => CurrentCount = StartingCount;
+		public void ResetPlayerShip()
+		{
+			AliveCount = Count;
+			if (Ship.SpecialAbilitySustainDamage)
+				CanSustainDamage = Count;
+		}
 
-		public int LoseUnits(int count) => CurrentCount -= count;
+		// Returns a negative number if there are still hits remaining after sustaining damage.
+		public int SustainDamage(int hits)
+		{
+			return CanSustainDamage -= hits;
+		}
+			
+
+		// Returns a negative number if there are still hits remaining after losing units.
+		public int LoseUnits(int hits)
+		{
+			if (CanSustainDamage > 0) throw new Exception("You cannot destroy units that can still sustain damage.");
+			return AliveCount -= hits;
+		}
 		
-		public string PrintUnit() => $" {StartingCount} {Unit.Name}{(StartingCount > 1 ? "s" : "")},";
+		public string PrintUnit() => $" {Count} {Ship.Name}{(Count > 1 ? "s" : "")},";
 	}
 }

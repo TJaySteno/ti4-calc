@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ti4_calc.SpecialAbilities;
-using static ti4_calc.SpecialAbilities.SustainDamage;
 
 namespace ti4_calc
 {
 	internal class Combat
 	{
-		private List<PlayerUnit> _attackingFleet;
-		private List<PlayerUnit> _defendingFleet;
+		private List<PlayerShip> _attackingFleet;
+		private List<PlayerShip> _defendingFleet;
 
 		private static readonly Random random = new Random();
 		private static readonly object syncLock = new object();
@@ -33,47 +31,52 @@ namespace ti4_calc
 			return numberOfHits;
 		}
 
-		private int GetRemainingUnitCount(List<PlayerUnit> fleet)
+		private int GetRemainingUnitCount(List<PlayerShip> fleet)
 		{
 			int count = 0;
-			fleet.ForEach(u => count += u.CurrentCount);
+			fleet.ForEach(u => count += u.AliveCount);
 			return count;
 		}
 
-		private int TakeShots(List<PlayerUnit> fleet)
+		private int TakeShots(List<PlayerShip> fleet)
 		{
 			int hits = 0;
-			fleet.ForEach(delegate (PlayerUnit unit) {
+			fleet.ForEach(delegate (PlayerShip unit) {
 				// Check to see if any units have 2+ dice per attack.
-				int numberOfDice = unit.CurrentCount * unit.Unit.CombatDiceCount;
-				hits += RollToHit(numberOfDice, unit.Unit.CombatToHit);
+				int numberOfDice = unit.AliveCount * unit.Ship.CombatDiceCount;
+				hits += RollToHit(numberOfDice, unit.Ship.CombatToHit);
 			});
 			return hits;
 		}
 
-		private int TakeHits(List<PlayerUnit> fleet, int hits)
+		private int SustainDamage(List<PlayerShip> fleet, int hits)
 		{
-			PlayerUnit unit;
+			// Implement Direct Hit later, once this is up and running.
+			
+			PlayerShip unit;
 
-			while (hits > 0 && fleet.Exists(u => u.CurrentCount > 0))
+			while (hits > 0 && fleet.Exists(u => u.CanSustainDamage > 0))
 			{
-				if (fleet.Any()) // Prevents IndexOutOfRangeException for empty list
-				{
-					// Find the last set of units
-					unit = fleet.FindLast(delegate (PlayerUnit u) { return u.CurrentCount > 0; });
+				// Find the last set of units.
+				unit = fleet.FindLast(delegate (PlayerShip u) { return u.CanSustainDamage > 0; });
 
-					var type = SustainDamage.IsSubclassOf(unit.Unit);
-					Console.WriteLine(type);
-					Console.ReadLine();
+				// Units sustain damage; when more hits remain, LoseUnits returns a negative number.
+				hits = -unit.SustainDamage(hits);
+			}
+			return hits;
+		}
 
-					/*if (unit.Unit.SustainDamage)
-					{
+		private int TakeHits(List<PlayerShip> fleet, int hits)
+		{
+			PlayerShip unit;
 
-					}*/
-					
-					// Remove units; when more hits remain, a negative number will be returned
-					hits = -unit.LoseUnits(hits);
-				}
+			while (hits > 0 && fleet.Exists(u => u.AliveCount > 0))
+			{
+				// Find the last set of units.
+				unit = fleet.FindLast(delegate (PlayerShip u) { return u.AliveCount > 0; });
+
+				// Remove units; when more hits remain, LoseUnits returns a negative number.
+				hits = -unit.LoseUnits(hits);
 			}
 
 			return GetRemainingUnitCount(fleet);
@@ -83,11 +86,26 @@ namespace ti4_calc
 				// units.FindAll().FindLast() ?
 		}
 
-		private string RoundOfCombat(List<PlayerUnit> _attackingFleet, List<PlayerUnit> _defendingFleet)
+		private string RoundOfCombat(Player attacker, Player defender)
 		{
+			if (!attacker.Fleet.Any() || !defender.Fleet.Any())
+				throw new Exception("Both fleets must have ships");
+
 			// Find number of hits per player
-			int _attackerNumberOfHits = TakeShots(_attackingFleet);
-			int _defenderNumberOfHits = TakeShots(_defendingFleet);
+			int _attackerNumberOfHits = TakeShots(attacker.Fleet);
+			int _defenderNumberOfHits = TakeShots(defender.Fleet);
+
+			// Sustain damage and recalculate remaining hits
+			if (defender.FleetCanSustainDamage())
+			{
+				_attackerNumberOfHits = SustainDamage(defender.Fleet, _attackerNumberOfHits);
+			}
+				
+			if (attacker.FleetCanSustainDamage())
+			{
+				
+				_defenderNumberOfHits = SustainDamage(attacker.Fleet, _defenderNumberOfHits);
+			}
 
 			// Assign hits to each player's units
 			int _attackingFleetRemaining = TakeHits(_attackingFleet, _defenderNumberOfHits);
@@ -107,9 +125,11 @@ namespace ti4_calc
 			_attackingFleet = attacker.Fleet;
 			_defendingFleet = defender.Fleet;
 
+			// Bombardment/PDS/AFB placeholder
+
 			while (_combatStatus == "Ongoing")
 			{ 
-				_combatStatus = RoundOfCombat(_attackingFleet, _defendingFleet);
+				_combatStatus = RoundOfCombat(attacker, defender);
 			}
 
 			return _combatStatus;

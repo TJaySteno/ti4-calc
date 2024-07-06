@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web.UI.WebControls;
-using static System.Collections.Specialized.BitVector32;
 
 namespace ti4_calc
 {
