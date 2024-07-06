@@ -1,36 +1,26 @@
 ﻿namespace ti4_calc
-{
-/*	interface ISpecialAttack
-	{
-		string SpecialAttackType { get; }
-		int SpecialAttackToHit { get; }
-		int SpecialAttackNumberOfDice { get; }
-
-		string GetSpecialAttack();
-		int UseSpecialAttack(); // Return number of hits made.
-	}*/
-	
+{	
 	interface IUnit
 	{
 		string Name { get; }
-		int ToHit { get; }
+		bool Upgraded { get; }
+		int Reinforcements { get; }
+		int Cost { get; }
 
-		// int Reinforcements { get; }
-		// int Capacity { get; }
-		// int NumberOfCombatDice { get; }
+		int CombatToHit { get; }
+		int CombatDiceCount { get; }
+
+		int Capacity { get; }
+
 
 		// bool HasPlanetaryShield { get; }
 		// bool CanBypassPlanetaryShield { get; }
 
 		// string SpecialText { get; }
 
-		// int Cost { get; }
 		// int Move { get; }
-		
+
 		// void UpgradeUnits();
 		// void DowngradeUnits();
-
-		// UseSustainDamage()
-		// ResetSustainDamage()
 	}
 }

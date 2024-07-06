@@ -19,29 +19,27 @@ namespace ti4_calc
 		private double GetAverage(int wins, int rounds)
 			=> (Convert.ToDouble(wins) / Convert.ToDouble(rounds)) * 100;
 
-		private string StringifyFleet (List<PlayerUnit> fleet)
-		{
-			string fleetString = "";
-			fleet.ForEach(u => fleetString += u.PrintUnit());
-			return fleetString;
-		}
-
 		public void Print(int draws, int numberOfRounds)
 		{
-			string _attackerFleetString = StringifyFleet(Attacker.Fleet);
-			string _defenderFleetString = StringifyFleet(Defender.Fleet);
+			string _attackerFleetString = Attacker.StringifyFleet();
+			string _defenderFleetString = Defender.StringifyFleet();
 			
 			double _attackerPercentage = GetAverage(Attacker.Wins, numberOfRounds);
 			double _defenderPercentage = GetAverage(Defender.Wins, numberOfRounds);
 			double _drawPercentage = GetAverage(draws, numberOfRounds);
 
-			Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Console.WriteLine("Trent's Sick Ass TI4 Battle Calculator, Babyyyyyyyyyyy!!!!!");
-			Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Console.WriteLine("");
-			Console.WriteLine($"Attacker Units:{_attackerFleetString} {Attacker.Wins} wins, {_attackerPercentage}%");
-			Console.WriteLine($"Defender Units:{_defenderFleetString} {Defender.Wins} wins, {_defenderPercentage}%");
-			Console.WriteLine($"Draws: {draws}, {_drawPercentage}%");
+			Console.WriteLine(
+				"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
+				"Trent's Sick Ass TI4 Battle Calculator, Babyyyyyyyyyyy!!!!!\n" +
+				"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
+				"\n" +
+				$"Out of {numberOfRounds} battle simulations run...\n" +
+				$"  Attacker: {Attacker.Wins} wins ({_attackerPercentage}%)\n" +
+				$"    Fleet: {_attackerFleetString}\n" +
+				$"  Defender: {Defender.Wins} wins ({_defenderPercentage}%)\n" +
+				$"    Fleet: {_defenderFleetString}\n" +
+				$"  Draws: {draws} ({_drawPercentage}%)\n"
+			);
 			Console.ReadLine();
 		}
 	}

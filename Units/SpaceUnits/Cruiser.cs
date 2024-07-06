@@ -2,15 +2,27 @@
 {
 	internal class Cruiser : IUnit
 	{
+		// IUnit properties
 		public string Name { get; } = "Cruiser";
-		public int Health { get; private set; } = 1;
-		public int ToHit { get; private set; } = 7;
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 8;
+		public int Cost { get; } = 2;
 
-		// public int Capacity { get; private set; } = 0;
+		public int CombatToHit { get; private set; } = 7;
+		public int CombatDiceCount { get; } = 1;
+		public int Capacity { get; private set; } = 0;
+		// IUnit properties
 
-		// public int Reinforcements { get; } = 8;
 
-		// public int Cost { get; } = 2;
+
+		public Cruiser(string faction, bool upgraded = false)
+		{
+			Upgraded = upgraded;
+
+			// Faction logic
+		}
+
+
 		// public int Move { get; private set; } = 2;
 
 		// private readonly bool _isTitans;

@@ -13,9 +13,6 @@
 		// public int CombatToHit { get; private set; }
 		// public int CombatNumberOfDice { get; private set; }
 
-		// public bool CanSustainDamage { get; private set; }
-		// public bool SustainedDamage { get; private set; }
-
 		// public bool HasPlanetaryShield { get; private set; }
 		// public bool CanBypassPlanetaryShield { get; private set; }
 

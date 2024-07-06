@@ -14,10 +14,15 @@ namespace ti4_calc
 				Results results = new Results(attacker, defender);
 
 				int _draws = 0;
-				int _numberOfRounds = 500000;
+				int _numberOfRounds = 5000;
 
-				attacker.UpdatePlayerUnitCount(8, new Cruiser());
-				defender.UpdatePlayerUnitCount(8, new Cruiser());
+				// Attacker's fleet
+				attacker.UpdatePlayerUnitCount(8, new Cruiser(attacker.Faction));
+				attacker.UpdatePlayerUnitCount(1, new Dreadnought(attacker.Faction));
+
+				// Defender's fleet
+				defender.UpdatePlayerUnitCount(1, new Cruiser(defender.Faction));
+				defender.UpdatePlayerUnitCount(5, new Dreadnought(defender.Faction));
 
 				for (int i = 0; i < _numberOfRounds; i++)
 				{

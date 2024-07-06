@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ti4_calc.SpecialAbilities;
+using static ti4_calc.SpecialAbilities.SustainDamage;
 
 namespace ti4_calc
 {
-
 	internal class Combat
 	{
 		private List<PlayerUnit> _attackingFleet;
@@ -13,15 +14,15 @@ namespace ti4_calc
 		private static readonly Random random = new Random();
 		private static readonly object syncLock = new object();
 
-		private static int Roll()
+		internal static int Roll()
 		{
 			lock (syncLock)
 			{
 				return random.Next(11);
 			}
-    }
+		}
 
-	private int RollToHit(int numberOfDice, int toHit)
+		private int RollToHit(int numberOfDice, int toHit)
 		{
 			int numberOfHits = 0;
 			while (numberOfDice > 0)
@@ -32,20 +33,22 @@ namespace ti4_calc
 			return numberOfHits;
 		}
 
-		private int TakeShots(List<PlayerUnit> fleet)
-		{
-			int hits = 0;
-			fleet.ForEach(delegate (PlayerUnit unit) {
-				hits += RollToHit(unit.CurrentCount, unit.Unit.ToHit);
-			});
-			return hits;
-		}
-
 		private int GetRemainingUnitCount(List<PlayerUnit> fleet)
 		{
 			int count = 0;
 			fleet.ForEach(u => count += u.CurrentCount);
 			return count;
+		}
+
+		private int TakeShots(List<PlayerUnit> fleet)
+		{
+			int hits = 0;
+			fleet.ForEach(delegate (PlayerUnit unit) {
+				// Check to see if any units have 2+ dice per attack.
+				int numberOfDice = unit.CurrentCount * unit.Unit.CombatDiceCount;
+				hits += RollToHit(numberOfDice, unit.Unit.CombatToHit);
+			});
+			return hits;
 		}
 
 		private int TakeHits(List<PlayerUnit> fleet, int hits)
@@ -58,6 +61,15 @@ namespace ti4_calc
 				{
 					// Find the last set of units
 					unit = fleet.FindLast(delegate (PlayerUnit u) { return u.CurrentCount > 0; });
+
+					var type = SustainDamage.IsSubclassOf(unit.Unit);
+					Console.WriteLine(type);
+					Console.ReadLine();
+
+					/*if (unit.Unit.SustainDamage)
+					{
+
+					}*/
 					
 					// Remove units; when more hits remain, a negative number will be returned
 					hits = -unit.LoseUnits(hits);

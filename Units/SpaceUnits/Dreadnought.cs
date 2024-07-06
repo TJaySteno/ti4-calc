@@ -1,8 +1,41 @@
-﻿/*namespace ti4_calc
+﻿using ti4_calc.SpecialAbilities;
+
+namespace ti4_calc
 {
-	internal class Dreadnought : Unit
+	internal class Dreadnought : IUnit, IBombardment
 	{
-		private readonly bool _isSardakk = false;
+		// IUnit properties
+		public string Name { get; } = "Dreadnought";
+		public bool Upgraded { get; private set; }
+		public int Reinforcements { get; } = 5;
+		public int Cost { get; } = 4;
+		public int CombatToHit { get; private set; } = 5;
+		public int CombatDiceCount { get; } = 1;
+		public int Capacity { get; private set; } = 1;
+		// IUnit properties
+
+
+		// IBombardment properties
+		public int BombardToHit { get; private set; } = 5;
+		public int BombardDiceCount { get; } = 1;
+		// IBombardment properties
+
+
+		// Other Properties
+		public bool NegateDirectHit { get; private set; } = false;
+
+		SustainDamage sustainDamage = new SustainDamage();
+		// Other Properties
+
+
+		public Dreadnought(string faction, bool upgraded = false)
+		{
+			Upgraded = upgraded;
+
+			// Faction logic
+		}
+
+		/*private readonly bool _isSardakk = false;
 		private readonly bool _isLIZIX = false;
 		private readonly bool _isLIZIXUpgraded = false;
 
@@ -37,7 +70,6 @@
 			throw new System.NotImplementedException();
 		}
 
-		// UpgradeDreadnought() ???
+		// UpgradeDreadnought() ???*/
 	}
 }
-*/

@@ -20,6 +20,6 @@ namespace ti4_calc
 
 		public int LoseUnits(int count) => CurrentCount -= count;
 		
-		public string PrintUnit() => $" {Unit.Name}: {StartingCount},";
+		public string PrintUnit() => $" {StartingCount} {Unit.Name}{(StartingCount > 1 ? "s" : "")},";
 	}
 }

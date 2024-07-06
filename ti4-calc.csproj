@@ -44,11 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Units\SpecialAbilities\SustainDamage.cs" />
     <Compile Include="Player\PlayerUnit.cs" />
     <Compile Include="Results.cs" />
     <Compile Include="Units\SpaceUnits\Carrier.cs" />
-    <Compile Include="Combat\CombatBombardment.cs" />
-    <Compile Include="Combat\CombatSpaceCannon.cs" />
+    <Compile Include="Units\SpecialAbilities\Bombardment.cs" />
+    <Compile Include="Units\SpecialAbilities\CombatSpaceCannon.cs" />
     <Compile Include="Units\SpaceUnits\Cruiser.cs" />
     <Compile Include="Units\SpaceUnits\Destroyer.cs" />
     <Compile Include="Units\SpaceUnits\Dreadnought.cs" />
@@ -64,14 +65,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Combat.cs" />
-    <Compile Include="Combat\AntiFtrBarrage.cs" />
+    <Compile Include="Units\SpecialAbilities\AntiFtrBarrage.cs" />
     <Compile Include="Units\SpaceUnits\WarSun.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Combat\combatNotes.txt" />
+    <Content Include="Units\SpecialAbilities\combatNotes.txt" />
     <Content Include="refactorNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

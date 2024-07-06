@@ -1,4 +1,4 @@
-﻿namespace ti4_calc
+﻿namespace ti4_calc.SpecialAbilities
 {
 	internal class AntiFtrBarrage
 	{
