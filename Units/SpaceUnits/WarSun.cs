@@ -1,44 +1,55 @@
 ﻿using System;
-
-using ti4_calc.SpecialAbilities;
+using ti4_calc.Units.SpaceUnits;
 
 namespace ti4_calc
 {
-	internal class WarSun : IShip, IBombardment
+	internal class WarSun : IShip
 	{
 		// IShip properties
 		public string Name { get; } = "War Sun";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 2;
-		public double Cost { get; private set; } = 12;
-		public int Capacity { get; } = 6;
+		public string SpecialText { get; }
+			= "Other players' units in this system lose their Planetary Shield ability.";
+		// IUnit
 
+		// ICombatUnit
+		public double Cost { get; private set; } = 12;
 		public int CombatToHit { get; } = 3;
 		public int CombatDiceCount { get; } = 3;
 		public bool SpecialAbilitySustainDamage { get; } = true;
-		// IShip properties
+		public bool IgnoreDirectHit { get; } = false;
+		// ICombatUnit
 
+		// IShip
+		public int Capacity { get; } = 6;
+		public int Move { get; private set; } = 2;
 
-		// IBombardment properties
+		public int AFBToHit { get; }
+		public int AFBDiceCount { get; }
+
 		public int BombardToHit { get; } = 3;
 		public int BombardDiceCount { get; } = 3;
-		// IBombardment properties
 
+		public bool DisablePlanetaryShield { get; } = true;
 
-		// Other Properties
-		public bool BypassPlanetaryShield { get; } = true;
-		// Other Properties
+		public int SpaceCannonToHit { get; }
+		public int SpaceCannonDiceCount { get; }
+		// IShip
+
 
 		public WarSun(string faction, bool upgraded = false)
 		{
-			if (faction != "Muaat" && !upgraded)
-				throw new Exception("Unupgraded War Suns are not available to this faction.");
+			if (!upgraded && faction != "Muaat")
+				throw new Exception($"Un-upgraded War Suns are not available to this faction: {faction}.");
 			
 			Upgraded = upgraded;
 
-			// Upgrade logic
-
-			// Faction logic
+			if (faction == "Muaat")
+			{
+				Move = (upgraded ? 3 : 1);
+				if (upgraded) Cost = 10;
+			}
 		}
 	}
 }

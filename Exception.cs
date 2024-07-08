@@ -1,4 +1,5 @@
 ﻿using System;
+// Later: Make better Exceptions.
 
 namespace ti4_calc
 {
@@ -10,19 +11,6 @@ namespace ti4_calc
 		}
 
 		public CannotBuildWarSunException(string message)
-		{
-
-		}
-	}
-
-	class TI4CalculatorException : Exception
-	{
-		public TI4CalculatorException()
-		{
-
-		}
-
-		public TI4CalculatorException(string message)
 		{
 
 		}
@@ -41,4 +29,16 @@ namespace ti4_calc
 		}
 	}
 
+	class TI4CalculatorException : Exception
+	{
+		public TI4CalculatorException()
+		{
+
+		}
+
+		public TI4CalculatorException(string message)
+		{
+
+		}
+	}
 }

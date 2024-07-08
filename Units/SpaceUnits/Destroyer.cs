@@ -1,33 +1,62 @@
-﻿namespace ti4_calc
+﻿using ti4_calc.Units.SpaceUnits;
+
+namespace ti4_calc
 {
-	internal class Destroyer : IShip, IAntiFighterBarrage
+	internal class Destroyer : IShip
 	{
-		// IShip properties
+
+		// IUnit
 		public string Name { get; } = "Destroyer";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 8;
-		public double Cost { get; } = 1;
-		public int Capacity { get; private set; } = 0;
+		public string SpecialText { get; private set; }
+		// IUnit
 
+		// ICombatUnit
+		public double Cost { get; } = 1;
 		public int CombatToHit { get; private set; } = 9;
 		public int CombatDiceCount { get; } = 1;
 		public bool SpecialAbilitySustainDamage { get; private set; } = false;
-		// IShip properties
+		public bool IgnoreDirectHit { get; } = false;
+		// ICombatUnit
 
+		// IShip
+		public int Move { get; } = 2;
+		public int Capacity { get; private set; }
 
-		// Other properties
-		public int AFBToHit { get; private set; } = 9;
+		public int AFBToHit { get; } = 9;
 		public int AFBDiceCount { get; private set; } = 2;
-		// Other properties
+
+		public int BombardToHit { get; }
+		public int BombardDiceCount { get; }
+
+		public bool DisablePlanetaryShield { get; }
+
+		public int SpaceCannonToHit { get; }
+		public int SpaceCannonDiceCount { get; }
+		// IShip
 
 
 		public Destroyer(string faction, bool upgraded = false)
 		{
 			Upgraded = upgraded;
 
-			// Upgrade logic
+			if (upgraded)
+			{
+				CombatToHit = 8;
+				
+				AFBToHit = 6;
+				AFBDiceCount = 3;
+			}
 
-			// Faction logic
+			if (faction == "Argent")
+			{
+				Capacity = 1;
+				CombatToHit -= 1;
+
+				if (upgraded)
+					SpecialText = "When this unit uses ANTI-FIGHTER BARRAGE, each result of 9 or 10 also destroys 1 of your opponents infantry in the space area of the active system";
+			}
 		}
 	}
 }

@@ -5,6 +5,7 @@
 		string Name { get; }
 		bool Upgraded { get; }
 		int Reinforcements { get; }
+		string SpecialText { get; }
 	}
 
 	interface ICombatUnit : IUnit
@@ -13,46 +14,17 @@
 		int CombatToHit { get; }
 		int CombatDiceCount { get; }
 		bool SpecialAbilitySustainDamage { get; }
+		bool IgnoreDirectHit { get; }
 	}
 
-	interface IShip : ICombatUnit
-	{
-		int Capacity { get; }
+	interface ICapacityCost { int CapacityCost { get; } }
 
-		// int Move { get; }
-	}
-
-    interface IGroundUnit : ICombatUnit, ICapacityCost
-	{
-
-	}
-	
-	interface IAntiFighterBarrage
-	{
-		int AFBToHit { get; }
-		int AFBDiceCount { get; }
-	}
-
-	interface IBombardment
-	{
-		int BombardToHit { get; }
-		int BombardDiceCount { get; }
-	}
-
-	interface ICapacityCost
-	{
-		int CapacityCost { get; }
-	}
-
-	interface IPlanetaryShield
+	interface IPlanetaryShield : ICombatUnit
 	{
 		bool PlanetaryShield { get; }
 	}
 
-
-	interface ISpaceCannon
-	{
-		int SpaceCannonToHit { get; }
-		int SpaceCannonDiceCount { get; }
-	}
+	/*interface IAntiFighterBarrage : IShip { }
+	interface IBombardment { }
+	interface ISpaceCannon { }*/
 }

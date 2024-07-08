@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ti4_calc
+﻿namespace ti4_calc
 {
-	internal class PDS : IUnit, IPlanetaryShield, ISpaceCannon
+	internal class PDS : IUnit, IPlanetaryShield
 	{
-		// IUnit properties
+		// IUnit
 		public string Name { get; } = "PDS";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 6;
-		// IUnit properties
+		public string SpecialText { get; }
+		// IUnit
 
+		// ICombatUnit
+		public double Cost { get; }
+		public int CombatToHit { get; private set; } = 0;
+		public int CombatDiceCount { get; private set; } = 0;
+		public bool SpecialAbilitySustainDamage { get; private set; } = false;
+		public bool IgnoreDirectHit { get; } = false;
+		// ICombatUnit
 
-		// IPlanetaryShield properties
+		// IPlanetaryShield
 		public bool PlanetaryShield { get; } = true;
-		// IPlanetaryShield properties
-
+		// IPlanetaryShield
 
 		// ISpaceCannon properties
 		public int SpaceCannonToHit { get; private set; } = 6;
@@ -30,10 +31,16 @@ namespace ti4_calc
 		{
 			Upgraded = upgraded;
 
-			// Upgrade logic
+			if (upgraded) SpaceCannonToHit = 5;
 
-			// Faction logic
-		}
+			if (faction == "Titans")
+			{
+				CombatToHit = (upgraded ? 6 : 7);
+				CombatDiceCount = 1;
+
+				SpecialText = "This unit is treated as both a structure and a ground force. It cannot be transported.";
+			}
+		}	
 
 		// Max 2 PDS per system, but upgraded PDS can fire in adjacent systems.
 		public int GetMaxPDS() => Upgraded ? Reinforcements : 2;

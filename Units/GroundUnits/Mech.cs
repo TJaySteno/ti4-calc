@@ -2,11 +2,11 @@
 using System.Security.Cryptography;
 using System.Security.Policy;
 
-namespace ti4_calc
+namespace ti4_calc.Units.GroundUnits
 {
-	internal class Mech : IGroundUnit, IBombardment, IPlanetaryShield, ISpaceCannon
+	internal class Mech : IArmy, IPlanetaryShield
 	{
-		// IGroundUnit properties
+		// IArmy properties
 		public string Name { get; } = "Mech";
 		public bool Upgraded { get; } = false;
 		public int Reinforcements { get; } = 4;
@@ -15,9 +15,10 @@ namespace ti4_calc
 		public int CombatToHit { get; private set; } = 6;
 		public int CombatDiceCount { get; private set; } = 1;
 		public bool SpecialAbilitySustainDamage { get; private set; } = true;
+		public bool IgnoreDirectHit { get; } = false;
 
 		public int CapacityCost { get; } = 1;
-		// IGroundUnit properties
+		// IArmy properties
 
 
 		// IBombardment properties
