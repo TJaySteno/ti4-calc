@@ -19,11 +19,11 @@ namespace ti4_calc
 		{
 			// Ensure we aren't adding two of the same unit.
 			if (Fleet.Exists(unitCur => unitCur.Type.Name == unitNew.Name))
-				throw new Exception("Only one stack per type of unit per player can be added.");
+				throw new UnitTypeException($"Only one stack of unit, {unitNew.Name}, can be added.");
 
 			// Ensure there are enough available pieces for this unit.
 			if (count > unitNew.Reinforcements)
-				throw new Exception($"Not enough reinforcements for {unitNew.Name}. Max: {unitNew.Reinforcements}.");
+				throw new ReinforcementsException($"Not enough reinforcements for the requested amount of {unitNew.Name}. Max: {unitNew.Reinforcements}.");
 
 			Fleet.Add(new Ship(count, unitNew));
 		}
@@ -64,7 +64,7 @@ namespace ti4_calc
 			else if (faction == "Yin") FactionFullName = "The Yin Brotherhood";
 			else if (faction == "Yssaril") FactionFullName = "The Yssaril Tribes";
 
-			else throw new Exception($"Faction provided does not exist: {faction}.");
+			else throw new NoFactionMatchException($"Faction provided does not exist: {faction}.");
 
 			Faction = faction;
 		}
@@ -93,9 +93,7 @@ namespace ti4_calc
 		internal string StringifyFleet()
 		{
 			if (Fleet.Count < 1)
-			{
-				throw new Exception("There is no fleet to stringify.");
-			};
+				throw new NoFleetException("There is no fleet to stringify.");
 			
 			string fleetString = "";
 			fleetString += $"(Cost {GetFleetCost()} TG)";

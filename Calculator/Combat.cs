@@ -14,7 +14,7 @@ namespace ti4_calc
 		internal Combat(Player attacker, Player defender, string combatType)
 		{
 			if (combatType != "space" && combatType != "ground")
-				throw new Exception("Must choose either space or ground combat.");
+				throw new CombatTypeException($"Combat must take place in space or ground. Value given: {combatType}.");
 
 			Attacker = attacker;
 			Defender = defender;
@@ -188,7 +188,7 @@ namespace ti4_calc
 			{
 
 			}
-			else throw new Exception("Combat type must be either space or ground.");
+			else throw new CombatTypeException($"Combat must take place in space or ground. Value given: {CombatType}.");
 
 			// Attacker.
 
@@ -234,7 +234,7 @@ namespace ti4_calc
 		{
 
 			if (!Attacker.Fleet.Any() || !Defender.Fleet.Any())
-				throw new Exception("Both fleets must have ships to start battle.");
+				throw new NoFleetException("Both fleets must have ships to start battle.");
 
 			// Pre-Combat
 			string _combatStatus = PreCombat();

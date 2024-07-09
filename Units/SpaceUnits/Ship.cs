@@ -34,7 +34,7 @@ namespace ti4_calc.Units.SpaceUnits
 		// Returns a negative number if there are still hits remaining after losing units.
 		public int LoseShips(int hits)
 		{
-			if (CanSustainDamage > 0 /* Later: || Direct Hit */) throw new Exception($"Cannot destroy {Type.Name} while it can still sustain damage.");
+			if (CanSustainDamage > 0 /* Later: || Direct Hit */) throw new SustainDamageException($"Cannot destroy {Type.Name} while it can still sustain damage.");
 			return AliveCount -= hits;
 		}
 		

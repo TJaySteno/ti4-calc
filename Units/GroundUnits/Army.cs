@@ -36,7 +36,7 @@ namespace ti4_calc.Units.GroundUnits
 		// Returns a negative number if there are still hits remaining after losing armies.
 		public int LoseArmies(int hits)
 		{
-			if (CanSustainDamage > 0) throw new Exception($"Cannot destroy {Type.Name} while it can still sustain damage.");
+			if (CanSustainDamage > 0) throw new SustainDamageException($"Cannot destroy {Type.Name} while it can still sustain damage.");
 			return AliveCount -= hits;
 		}
 

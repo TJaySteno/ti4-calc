@@ -41,7 +41,7 @@ namespace ti4_calc
 		public WarSun(string faction, bool upgraded = false)
 		{
 			if (!upgraded && faction != "Muaat")
-				throw new Exception($"Un-upgraded War Suns are not available to this faction: {faction}.");
+				throw new CannotBuildWarSunException($"Un-upgraded War Suns are not available to faction, {faction}.");
 			
 			Upgraded = upgraded;
 

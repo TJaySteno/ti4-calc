@@ -57,7 +57,7 @@ namespace ti4_calc
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"Unhandled Exception: {ex}");
+				Console.WriteLine($"UnhandledException: {ex}");
 				Console.ReadLine();
 			}
 		}
