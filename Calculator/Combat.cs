@@ -14,7 +14,7 @@ namespace ti4_calc
 		internal Combat(Player attacker, Player defender, string combatType)
 		{
 			if (combatType != "space" && combatType != "ground")
-				throw new CombatTypeException($"Combat must take place in space or ground. Value given: {combatType}.");
+				throw new CombatTypeException(combatType);
 
 			Attacker = attacker;
 			Defender = defender;
@@ -38,12 +38,8 @@ namespace ti4_calc
 			// Later: JolNaar Mech affects this too
 
 			int numberOfHits = 0;
-
 			for (int i = 0; i < numberOfDice; i++)
-			{
 				if (Roll() >= toHit) numberOfHits++;
-			}
-
 			return numberOfHits;
 		}
 		// Dice rolls
@@ -111,34 +107,60 @@ namespace ti4_calc
 
 
 		// Pre-combat
-		private int FireSpaceCannons(List<Ship> fleet)
+		private int SpaceCannonPhase(Player player, bool enemyHasArgentFlagship)
 		{
-			// Later: Argent Flagship disables Space Cannon
-			/* Space Cannon, space combat
-			 *   1. shipsDestroyed += Roll() >= SpaceCannonToHit
-			 *   2. (Any hits destroy the ship; sustain??)
-			 */
+			if (enemyHasArgentFlagship)
+				{ return 0; }
 
-			/* Space Cannon Defense, ground combat
-			 *   1. armiesDestroyed += Roll() >= SpaceCannonToHit
-			 *   2. (Any hits destroy an army; sustain??)
-			 *   3. (This only works from the planet you're attacking.)
-			 *     a. Usually limited to 2 PDS/combat.
-			 *     b. Attackers can never use this.
-			 *   4. Argent Flagship disables Space Cannon
-			 */
-			return 1;
+			int hits = 0;
+
+			if (CombatType == "space")
+			{
+				// Fire PDS.
+				if (player.PDS.Count > 0)
+					hits += RollToHit(player.PDS.Count, player.PDS.SpaceCannonToHit);
+
+				// Fire any Space Cannons in the fleet.
+				player.Fleet.ForEach(delegate (Ship ship) {
+					if (ship.Type.SpaceCannonToHit > 0)
+					{
+						hits += RollToHit(
+							ship.AliveCount * ship.Type.SpaceCannonDiceCount,
+							ship.Type.SpaceCannonToHit
+						);
+					}
+				});
+				
+			}
+			else if (CombatType == "space")
+			{
+				/* Space Cannon Defense, ground combat
+				 *   1. armiesDestroyed += Roll() >= SpaceCannonToHit
+				 *   2. (Any hits destroy an army; sustain??)
+				 *   3. (This only works from the planet you're attacking.)
+				 *     a. Usually limited to 2 PDS/combat.
+				 *     b. Attackers can never use this.
+				 *   4. Argent Flagship disables Space Cannon
+				 */
+			}
+			else throw new CombatTypeException(CombatType);
+			return hits;
 		}
 
 		private int UseAntiFighterBarrage(List<Ship> fleet)
 		{
+			if (!fleet.Exists(s => s.Type.AFBToHit > 0))
+				{ return 0; }
+
 			int hits = 0;
 			fleet.ForEach(delegate (Ship ship)
 			{
 				if (ship.Type.AFBToHit > 0)
 				{
-					int numberOfDice = ship.AliveCount * ship.Type.AFBDiceCount;
-					hits += RollToHit(numberOfDice, ship.Type.AFBToHit);
+					hits += RollToHit(
+						ship.AliveCount * ship.Type.AFBDiceCount,
+						ship.Type.AFBToHit
+					);
 				}
 			});
 			return hits;
@@ -159,14 +181,18 @@ namespace ti4_calc
 			if (CombatType == "space")
 			{
 				// Space Cannon
-				if (Attacker.Fleet.Exists(s => s.Type.SpaceCannonToHit > 0))
-					_attackersHits += FireSpaceCannons(Attacker.Fleet);
-				if (Defender.Fleet.Exists(s => s.Type.SpaceCannonToHit > 0))
-					_defendersHits += FireSpaceCannons(Defender.Fleet);
+				_attackersHits += SpaceCannonPhase(
+					Attacker,
+					Defender.Faction == "Argent" && Defender.Fleet.Exists(s => s.Type.Name == "Flagship")
+				);
+				_defendersHits += SpaceCannonPhase(
+					Defender,
+					Attacker.Faction == "Argent" && Attacker.Fleet.Exists(s => s.Type.Name == "Flagship")
+				);
 
-				// Later: does this need to specify ships vs ground?
 				AssignHits(Attacker, _defendersHits);
 				AssignHits(Defender, _attackersHits);
+				// Later: does this need to specify ships vs ground?
 				// Space Cannon
 
 				_attackersHits = 0;
@@ -180,17 +206,13 @@ namespace ti4_calc
 
 				AssignHits(Attacker, _defendersHits, "Fighter");
 				AssignHits(Defender, _attackersHits, "Fighter");
-
-				Console.WriteLine(_attackersHits + " " + Defender.Fleet.Find(s=>s.Type.Name == "Fighter").AliveCount);
 				// Anti-Fighter Barrage
 			}
 			else if (CombatType == "ground")
 			{
 
 			}
-			else throw new CombatTypeException($"Combat must take place in space or ground. Value given: {CombatType}.");
-
-			// Attacker.
+			else throw new CombatTypeException(CombatType);
 
 			return _combatStatus;
 		}
@@ -202,8 +224,10 @@ namespace ti4_calc
 		{
 			int hits = 0;
 			fleet.ForEach(delegate (Ship ship) {
-				int numberOfDice = ship.AliveCount * ship.Type.CombatDiceCount;
-				hits += RollToHit(numberOfDice, ship.Type.CombatToHit);
+				hits += RollToHit(
+					ship.AliveCount * ship.Type.CombatDiceCount,
+					ship.Type.CombatToHit
+				);
 			});
 			return hits;
 		}

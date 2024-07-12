@@ -11,56 +11,36 @@ namespace ti4_calc
 
 		public TI4CalculatorException(string message)
 		{
-			Console.WriteLine($"UnhandledException: {message}");
+			Console.WriteLine($"TI4CalculatorException: {message}");
 		}
 	}
 
 	class CannotBuildWarSunException : TI4CalculatorException
 	{
-		public CannotBuildWarSunException()
+		public CannotBuildWarSunException(string faction)
 		{
-			Console.WriteLine($"CannotBuildWarSunException: Un-upgraded War Suns are not available to this faction.");
-		}
-
-		public CannotBuildWarSunException(string message)
-		{
-			Console.WriteLine($"CannotBuildWarSunException: {message}");
+			Console.WriteLine($"CannotBuildWarSunException: Un-upgraded War Suns are not available to faction, {faction}.");
 		}
 	}
 
 	class CombatTypeException : TI4CalculatorException
 	{
-		public CombatTypeException()
+		public CombatTypeException(string combatType)
 		{
-			Console.WriteLine($"CombatTypeException: Combat must take place in space or ground.");
-		}
-		
-		public CombatTypeException(string message)
-		{
-			Console.WriteLine($"CombatTypeException: {message}");
+			Console.WriteLine($"CombatTypeException: $Combat must take place in space or ground. Value given: {combatType}.");
 		}
 	}
 
 	class NoFactionMatchException : TI4CalculatorException
 	{
-		public NoFactionMatchException()
+		public NoFactionMatchException(string faction)
 		{
-			Console.WriteLine("NoFactionMatchException: The faction provided does not exist.");
-		}
-
-		public NoFactionMatchException(string message)
-		{
-			Console.WriteLine($"NoFactionMatchException: {message}");
+			Console.WriteLine($"NoFactionMatchException: The faction provided does not exist: {faction}.");
 		}
 	}
 
 	class NoFleetException : TI4CalculatorException
 	{
-		public NoFleetException()
-		{
-			Console.WriteLine($"NoFleetException: Both players must have a fleet.");
-		}
-
 		public NoFleetException(string message)
 		{
 			Console.WriteLine($"NoFleetException: {message}");
@@ -69,40 +49,25 @@ namespace ti4_calc
 
 	class ReinforcementsException : TI4CalculatorException
 	{
-		public ReinforcementsException()
+		public ReinforcementsException(string unitName, int reinforcements)
 		{
-			Console.WriteLine($"The requested number of ships is greater than the reinforcement supply.");
-		}
-
-		public ReinforcementsException(string message)
-		{
-			Console.WriteLine($"ReinforcementsException: {message}");
+			Console.WriteLine($"ReinforcementsException: Not enough reinforcements for the requested amount of {unitName}. Max: {reinforcements}.");
 		}
 	}
 
 	class SustainDamageException : TI4CalculatorException
 	{
-		public SustainDamageException()
+		public SustainDamageException(string shipName)
 		{
-			Console.WriteLine($"SustainDamageException: Cannot destroy this unit while it can still sustain damage.");
-		}
-
-		public SustainDamageException(string message)
-		{
-			Console.WriteLine($"SustainDamageException: {message}");
+			Console.WriteLine($"SustainDamageException: $Cannot destroy {shipName} while it can still sustain damage.");
 		}
 	}
 
 	class UnitTypeException : TI4CalculatorException
 	{
-		public UnitTypeException()
+		public UnitTypeException(string unitName)
 		{
-			Console.WriteLine($"UnitTypeException: Unhandled unit type exception.");
-		}
-
-		public UnitTypeException(string message)
-		{
-			Console.WriteLine($"UnitTypeException: {message}");
+			Console.WriteLine($"UnitTypeException: Only one stack of unit, {unitName}, can be added.");
 		}
 	}
 }

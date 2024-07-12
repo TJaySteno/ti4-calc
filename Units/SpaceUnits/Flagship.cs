@@ -285,7 +285,7 @@ namespace ti4_calc
 
 				SpecialText = "This ship can move through systems that contain other player's ships.";
 			}
-			else throw new NoFactionMatchException($"This faction does not exist: {faction}.");
+			else throw new NoFactionMatchException(faction);
 		}
 	}
 }

@@ -16,6 +16,8 @@ namespace ti4_calc
 				// Attacker
 				Player attacker = new Player("Sol");
 
+				// attacker.PDS.UpdatePDS(new UpdatePDS(attacker.Faction, 6, true));
+
 				/*attacker.AddShipToFleet(4,	new Carrier(attacker.Faction));
 				attacker.AddShipToFleet(8,	new Cruiser(attacker.Faction));*/
 				attacker.AddShipToFleet(3,	new Destroyer(attacker.Faction));
@@ -25,14 +27,17 @@ namespace ti4_calc
 				attacker.AddShipToFleet(2,	new WarSun(attacker.Faction, true));*/
 				// Attacker
 
+
 				// Defender (Later: Nebula bonus)
 				Player defender = new Player("Muaat");
+				
+				defender.PDS.UpdatePDS(defender.Faction, 2);
 
 				/*defender.AddShipToFleet(4, new Carrier(defender.Faction));
-				defender.AddShipToFleet(8, new Cruiser(defender.Faction));
-				defender.AddShipToFleet(8,	new Destroyer(defender.Faction));
-				defender.AddShipToFleet(5,	new Dreadnought(defender.Faction));*/
-				defender.AddShipToFleet(4, new Fighter(defender.Faction));
+				defender.AddShipToFleet(8, new Cruiser(defender.Faction));*/
+				defender.AddShipToFleet(2, new Destroyer(defender.Faction));
+				// defender.AddShipToFleet(5, new Dreadnought(defender.Faction));
+				// defender.AddShipToFleet(4, new Fighter(defender.Faction));
 				/*defender.AddShipToFleet(1,	new Flagship(defender.Faction));
 				defender.AddShipToFleet(2,	new WarSun(defender.Faction, true));*/
 				// Defender

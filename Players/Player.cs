@@ -12,18 +12,19 @@ namespace ti4_calc
 		public int FactionCombatModifier { get; private set; } = 0;
 		internal int Wins { get; private set; } = 0;
 
+		internal PDS PDS = new PDS();
 		internal List<Ship> Fleet = new List<Ship>();
-
+		internal List<Army> Army = new List<Army>();
 
 		public void AddShipToFleet(int count, IShip unitNew)
 		{
 			// Ensure we aren't adding two of the same unit.
 			if (Fleet.Exists(unitCur => unitCur.Type.Name == unitNew.Name))
-				throw new UnitTypeException($"Only one stack of unit, {unitNew.Name}, can be added.");
+				throw new UnitTypeException(unitNew.Name);
 
 			// Ensure there are enough available pieces for this unit.
 			if (count > unitNew.Reinforcements)
-				throw new ReinforcementsException($"Not enough reinforcements for the requested amount of {unitNew.Name}. Max: {unitNew.Reinforcements}.");
+				throw new ReinforcementsException(unitNew.Name, unitNew.Reinforcements);
 
 			Fleet.Add(new Ship(count, unitNew));
 		}
@@ -64,7 +65,7 @@ namespace ti4_calc
 			else if (faction == "Yin") FactionFullName = "The Yin Brotherhood";
 			else if (faction == "Yssaril") FactionFullName = "The Yssaril Tribes";
 
-			else throw new NoFactionMatchException($"Faction provided does not exist: {faction}.");
+			else throw new NoFactionMatchException(faction);
 
 			Faction = faction;
 		}
@@ -92,7 +93,7 @@ namespace ti4_calc
 
 		internal string StringifyFleet()
 		{
-			if (Fleet.Count < 1)
+			if (Fleet.Count < 1 && PDS.Count < 1)
 				throw new NoFleetException("There is no fleet to stringify.");
 			
 			string fleetString = "";

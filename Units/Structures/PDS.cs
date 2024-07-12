@@ -1,12 +1,21 @@
-﻿namespace ti4_calc
+﻿using System;
+using ti4_calc.Units.SpaceUnits;
+
+namespace ti4_calc
 {
 	internal class PDS : IUnit, IPlanetaryShield
 	{
+		// Counts
+		internal int Count { get; private set; } = 0;
+		internal int AliveCount { get; private set; } = 0;
+		// Counts
+
+
 		// IUnit
 		public string Name { get; } = "PDS";
 		public bool Upgraded { get; private set; }
 		public int Reinforcements { get; } = 6;
-		public string SpecialText { get; }
+		public string SpecialText { get; private set; }
 		// IUnit
 
 		// ICombatUnit
@@ -26,10 +35,14 @@
 		public int SpaceCannonDiceCount { get; } = 1;
 		// ISpaceCannon properties
 
-
-		public PDS(string faction, bool upgraded = false)
+		public void UpdatePDS(string faction, int count, bool upgraded = false)
 		{
+			if (count > Reinforcements)
+				throw new ReinforcementsException("PDS", Reinforcements);
+
 			Upgraded = upgraded;
+			Count = count;
+			AliveCount = count;
 
 			if (upgraded) SpaceCannonToHit = 5;
 
@@ -39,10 +52,12 @@
 				CombatDiceCount = 1;
 
 				SpecialText = "This unit is treated as both a structure and a ground force. It cannot be transported.";
+				// Later: Add this to List<Army> as a PDS
 			}
 		}	
 
 		// Max 2 PDS per system, but upgraded PDS can fire in adjacent systems.
-		public int GetMaxPDS() => Upgraded ? Reinforcements : 2;
+		public int GetMaxUpdatePDS()
+			=> Upgraded ? Reinforcements : 2;
 	}
 }

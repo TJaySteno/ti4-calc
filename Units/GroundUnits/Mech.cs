@@ -72,6 +72,7 @@ namespace ti4_calc.Units.GroundUnits
 			else if (faction == "Xxcha") Xxcha();
 			else if (faction == "Yin") Yin();
 			else if (faction == "Yssaril") Yssaril();
+			else throw new NoFactionMatchException(faction);
 		}
 
 		private void Arborec()

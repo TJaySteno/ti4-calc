@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ti4_calc.Units.SpaceUnits
+﻿namespace ti4_calc.Units.SpaceUnits
 {
 	public class Ship
 	{
@@ -12,12 +10,14 @@ namespace ti4_calc.Units.SpaceUnits
 
 		internal Ship(int count, IShip type)
 		{
+			if (count > type.Reinforcements)
+				throw new ReinforcementsException(type.Name, type.Reinforcements);
+			
+			Type = type;
 			Count = count;
 			AliveCount = count;
 			if (type.SpecialAbilitySustainDamage)
 				CanSustainDamage = count;
-
-			Type = type;
 		}
 
 		public void ResetShip()
@@ -34,7 +34,7 @@ namespace ti4_calc.Units.SpaceUnits
 		// Returns a negative number if there are still hits remaining after losing units.
 		public int LoseShips(int hits)
 		{
-			if (CanSustainDamage > 0 /* Later: || Direct Hit */) throw new SustainDamageException($"Cannot destroy {Type.Name} while it can still sustain damage.");
+			if (CanSustainDamage > 0 /* Later: || Direct Hit */) throw new SustainDamageException(Type.Name);
 			return AliveCount -= hits;
 		}
 		
