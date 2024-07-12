@@ -59,5 +59,8 @@ namespace ti4_calc
 		// Max 2 PDS per system, but upgraded PDS can fire in adjacent systems.
 		public int GetMaxUpdatePDS()
 			=> Upgraded ? Reinforcements : 2;
+
+		public string Stringify()
+			=> $"{Count} PDS";
 	}
 }

@@ -256,7 +256,6 @@ namespace ti4_calc
 
 		public string DoBattle()
 		{
-
 			if (!Attacker.Fleet.Any() || !Defender.Fleet.Any())
 				throw new NoFleetException("Both fleets must have ships to start battle.");
 
@@ -265,7 +264,7 @@ namespace ti4_calc
 
 			// Regular combat
 			while (_combatStatus == "Ongoing")
-				_combatStatus = RoundOfCombat();
+				{ _combatStatus = RoundOfCombat(); }
 
 			return _combatStatus;
 		}

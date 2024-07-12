@@ -18,9 +18,9 @@ namespace ti4_calc
 
 				// attacker.PDS.UpdatePDS(new UpdatePDS(attacker.Faction, 6, true));
 
-				/*attacker.AddShipToFleet(4,	new Carrier(attacker.Faction));
-				attacker.AddShipToFleet(8,	new Cruiser(attacker.Faction));*/
-				attacker.AddShipToFleet(3,	new Destroyer(attacker.Faction));
+				// attacker.AddShipToFleet(4, new Carrier(attacker.Faction));
+				attacker.AddShipToFleet(3, new Cruiser(attacker.Faction));
+				// attacker.AddShipToFleet(3,	new Destroyer(attacker.Faction));
 				/*attacker.AddShipToFleet(5,	new Dreadnought(attacker.Faction));
 				attacker.AddShipToFleet(10, new Fighter(attacker.Faction));
 				attacker.AddShipToFleet(1,	new Flagship(attacker.Faction));
@@ -33,9 +33,9 @@ namespace ti4_calc
 				
 				defender.PDS.UpdatePDS(defender.Faction, 2);
 
-				/*defender.AddShipToFleet(4, new Carrier(defender.Faction));
-				defender.AddShipToFleet(8, new Cruiser(defender.Faction));*/
-				defender.AddShipToFleet(2, new Destroyer(defender.Faction));
+				// defender.AddShipToFleet(2, new Carrier(defender.Faction));
+				defender.AddShipToFleet(2, new Cruiser(defender.Faction));
+				//defender.AddShipToFleet(2, new Destroyer(defender.Faction));
 				// defender.AddShipToFleet(5, new Dreadnought(defender.Faction));
 				// defender.AddShipToFleet(4, new Fighter(defender.Faction));
 				/*defender.AddShipToFleet(1,	new Flagship(defender.Faction));

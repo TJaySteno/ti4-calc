@@ -18,6 +18,10 @@ namespace ti4_calc
 
 		public void Print(int draws, int numberOfRounds)
 		{
+			string _attackerPdsString = Attacker.PDS.Stringify();
+			string _defenderPdsString = Defender.PDS.Stringify();
+
+
 			string _attackerFleetString = Attacker.StringifyFleet();
 			string _defenderFleetString = Defender.StringifyFleet();
 			
@@ -31,10 +35,10 @@ namespace ti4_calc
 				"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
 				"\n" +
 				$"Out of {numberOfRounds} battle simulations run...\n" +
-				$"  Attacker: {Attacker.Wins} wins ({_attackerPercentage}%)\n" +
-				$"    Fleet: {_attackerFleetString}\n" +
-				$"  Defender: {Defender.Wins} wins ({_defenderPercentage}%)\n" +
-				$"    Fleet: {_defenderFleetString}\n" +
+				$"  Attacker: {_attackerFleetString}\n" +
+				$"    Wins: {Attacker.Wins} wins ({_attackerPercentage}%)\n" +
+				$"  Defender: {_defenderFleetString}\n" +
+				$"    Wins: {Defender.Wins} wins ({_defenderPercentage}%)\n" +
 				$"  Draws: {draws} ({_drawPercentage}%)\n"
 			);
 			Console.ReadLine();
